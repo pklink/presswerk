@@ -92,7 +92,12 @@ defmodule Presswerk.MixProject do
         "esbuild presswerk --minify",
         "phx.digest"
       ],
-      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+      precommit: [
+        "compile --warnings-as-errors",
+        "deps.unlock --check-unused",
+        "format --check-formatted",
+        "test"
+      ]
     ]
   end
 end

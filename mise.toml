@@ -3,8 +3,8 @@ erlang = "latest"
 elixir = "latest"
 
 [tasks.setup]
-description = "Install dependencies, set up the database, and build assets"
-run = "mix setup"
+description = "Set up the local development environment"
+run = "mix setup && git config core.hooksPath .githooks"
 
 [tasks.dev]
 description = "Start the Phoenix server"

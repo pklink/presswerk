@@ -36,11 +36,11 @@ Elixir, Phoenix 1.8, Phoenix LiveView, Ecto with SQLite (`ecto_sqlite3`), Tailwi
 ```sh
 git clone <repo-url> presswerk
 cd presswerk
-mise install # if using mise
-mix setup
+mise install
+mise run setup
 ```
 
-`mix setup` fetches the dependencies, creates the SQLite database (`presswerk_dev.db` in the project folder), runs the migrations and builds the assets.
+`mise run setup` fetches the dependencies, creates the SQLite database (`presswerk_dev.db` in the project folder), runs the migrations, builds the assets and activates the local pre-commit hook. Without mise, run `mix setup` and `git config core.hooksPath .githooks` manually.
 
 ## Running
 
@@ -55,6 +55,8 @@ The app is then available at <http://localhost:4000>.
 ```sh
 mix test
 ```
+
+The pre-commit hook runs `mix precommit` before each commit (compilation, dependency lock check, formatting check and tests). You can also run `mix precommit` manually.
 
 ## Project structure
 
