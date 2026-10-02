@@ -11,6 +11,8 @@ Presswerk is a small web app for tracking vinyl preorders. The UI supports Engli
 
 Presswerk is built with Elixir, Phoenix LiveView, and SQLite. Data is stored in a local SQLite database; no external services are required.
 
+**AI disclosure:** A large part of the code in this project is AI-generated.
+
 ## Run locally
 
 Install [mise](https://mise.jdx.dev) and Git, then run from the project directory:
