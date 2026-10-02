@@ -42,3 +42,6 @@ npm-debug.log
 
 # IDE
 /.idea/
+
+# Local Docker configuration
+/.env
