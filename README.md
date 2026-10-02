@@ -36,6 +36,7 @@ Elixir, Phoenix 1.8, Phoenix LiveView, Ecto with SQLite (`ecto_sqlite3`), Tailwi
 ```sh
 git clone <repo-url> presswerk
 cd presswerk
+mise install # if using mise
 mix setup
 ```
 
