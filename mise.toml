@@ -1,6 +1,7 @@
 [tools]
 erlang = "latest"
 elixir = "latest"
+opencode = "latest"
 
 [tasks.setup]
 description = "Set up the local development environment"
@@ -9,6 +10,10 @@ run = "mix setup && git config core.hooksPath .githooks"
 [tasks.dev]
 description = "Start the Phoenix server"
 run = "mix phx.server"
+
+[tasks.opencode]
+description = "Start OpenCode"
+run = "opencode"
 
 [tasks.test]
 description = "Run tests"
