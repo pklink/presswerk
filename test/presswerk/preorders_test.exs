@@ -44,7 +44,7 @@ defmodule Presswerk.PreordersTest do
     test "Dublette wird mit freundlicher Meldung abgelehnt" do
       assert {:ok, _} = Preorders.create_preorder(@valid)
       assert {:error, cs} = Preorders.create_preorder(@valid)
-      assert %{artist: ["Diese Platte wurde bereits erfasst."]} = errors_on(cs)
+      assert %{artist: ["This record has already been added."]} = errors_on(cs)
     end
 
     test "gleicher Artist mit anderem Album ist erlaubt" do
@@ -67,7 +67,7 @@ defmodule Presswerk.PreordersTest do
       assert {:error, _} = Preorders.update_preorder(b, %{artist: ""})
 
       assert {:error, cs} = Preorders.update_preorder(b, %{artist: a.artist, album: a.album})
-      assert %{artist: ["Diese Platte wurde bereits erfasst."]} = errors_on(cs)
+      assert %{artist: ["This record has already been added."]} = errors_on(cs)
     end
   end
 

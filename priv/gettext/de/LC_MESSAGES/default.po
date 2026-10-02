@@ -1,0 +1,357 @@
+msgid ""
+msgstr ""
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/presswerk_web/components/core_components.ex:375
+#, elixir-autogen, elixir-format
+msgid "Actions"
+msgstr "Aktionen"
+
+#: lib/presswerk_web/live/dashboard_live.ex:37
+#, elixir-autogen, elixir-format
+msgid "Add preorder"
+msgstr "Vorbestellung erfassen"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:80
+#: lib/presswerk_web/live/preorder_live/index.ex:101
+#, elixir-autogen, elixir-format
+msgid "Album"
+msgstr "Album"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:71
+#, elixir-autogen, elixir-format
+msgid "All statuses"
+msgstr "Alle Status"
+
+#: lib/presswerk_web/components/preorder_components.ex:29
+#, elixir-autogen, elixir-format
+msgid "April"
+msgstr "April"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:79
+#: lib/presswerk_web/live/preorder_live/index.ex:100
+#, elixir-autogen, elixir-format
+msgid "Artist"
+msgstr "Artist"
+
+#: lib/presswerk_web/components/preorder_components.ex:33
+#, elixir-autogen, elixir-format
+msgid "August"
+msgstr "August"
+
+#: lib/presswerk_web/live/preorder_live/show.ex:31
+#, elixir-autogen, elixir-format
+msgid "Back to overview"
+msgstr "Zurück zur Übersicht"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:84
+#, elixir-autogen, elixir-format
+msgid "By artist"
+msgstr "Nach Artist"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:82
+#, elixir-autogen, elixir-format
+msgid "By release date"
+msgstr "Nach Release-Datum"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:103
+#, elixir-autogen, elixir-format
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: lib/presswerk_web/components/preorder_components.ex:11
+#, elixir-autogen, elixir-format
+msgid "Cancelled"
+msgstr "Storniert"
+
+#: lib/presswerk_web/live/dashboard_live.ex:24
+#, elixir-autogen, elixir-format
+msgid "Cancelled preorders"
+msgstr "Stornierte Vorbestellungen"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:58
+#, elixir-autogen, elixir-format
+msgid "Changes saved."
+msgstr "Änderungen gespeichert."
+
+#: lib/presswerk_web/components/core_components.ex:81
+#, elixir-autogen, elixir-format
+msgid "Close"
+msgstr "Schließen"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:91
+#, elixir-autogen, elixir-format
+msgid "Cover URL"
+msgstr "Cover-URL"
+
+#: lib/presswerk_web/live/preorder_live/show.ex:39
+#, elixir-autogen, elixir-format
+msgid "Cover of %{album}"
+msgstr "Cover von %{album}"
+
+#: lib/presswerk_web/components/layouts.ex:55
+#: lib/presswerk_web/live/dashboard_live.ex:12
+#, elixir-autogen, elixir-format
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: lib/presswerk_web/components/preorder_components.ex:37
+#, elixir-autogen, elixir-format
+msgid "December"
+msgstr "Dezember"
+
+#: lib/presswerk_web/live/preorder_live/show.ex:94
+#, elixir-autogen, elixir-format
+msgid "Delete"
+msgstr "Löschen"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:26
+#: lib/presswerk_web/live/preorder_live/show.ex:86
+#, elixir-autogen, elixir-format
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: lib/presswerk_web/components/preorder_components.ex:27
+#, elixir-autogen, elixir-format
+msgid "February"
+msgstr "Februar"
+
+#: lib/presswerk_web/components/preorder_components.ex:26
+#, elixir-autogen, elixir-format
+msgid "January"
+msgstr "Januar"
+
+#: lib/presswerk_web/components/preorder_components.ex:32
+#, elixir-autogen, elixir-format
+msgid "July"
+msgstr "Juli"
+
+#: lib/presswerk_web/components/preorder_components.ex:31
+#, elixir-autogen, elixir-format
+msgid "June"
+msgstr "Juni"
+
+#: lib/presswerk_web/components/layouts.ex:45
+#, elixir-autogen, elixir-format
+msgid "Keep track of your vinyl preorders."
+msgstr "Behalte deine Vinyl-Vorbestellungen im Blick."
+
+#: lib/presswerk_web/live/preorder_live/show.ex:64
+#, elixir-autogen, elixir-format
+msgid "Link"
+msgstr "Link"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:92
+#, elixir-autogen, elixir-format
+msgid "Link (e.g. shop page)"
+msgstr "Link (z. B. Shop-Seite)"
+
+#: lib/presswerk_web/components/layouts.ex:53
+#, elixir-autogen, elixir-format
+msgid "Main navigation"
+msgstr "Hauptnavigation"
+
+#: lib/presswerk_web/components/preorder_components.ex:28
+#, elixir-autogen, elixir-format
+msgid "March"
+msgstr "März"
+
+#: lib/presswerk_web/components/preorder_components.ex:30
+#, elixir-autogen, elixir-format
+msgid "May"
+msgstr "Mai"
+
+#: lib/presswerk_web/components/layouts.ex:63
+#: lib/presswerk_web/live/preorder_live/index.ex:50
+#, elixir-autogen, elixir-format
+msgid "New"
+msgstr "Neu"
+
+#: lib/presswerk_web/components/layouts.ex:63
+#: lib/presswerk_web/live/preorder_live/form.ex:18
+#, elixir-autogen, elixir-format
+msgid "New preorder"
+msgstr "Neue Vorbestellung"
+
+#: lib/presswerk_web/components/layouts.ex:142
+#, elixir-autogen, elixir-format
+msgid "No connection"
+msgstr "Keine Verbindung"
+
+#: lib/presswerk_web/live/dashboard_live.ex:35
+#, elixir-autogen, elixir-format
+msgid "No open preorders with a release date."
+msgstr "Keine offenen Vorbestellungen mit Release-Datum."
+
+#: lib/presswerk_web/live/preorder_live/index.ex:93
+#, elixir-autogen, elixir-format
+msgid "No preorders found."
+msgstr "Keine Vorbestellungen gefunden."
+
+#: lib/presswerk_web/live/preorder_live/form.ex:93
+#: lib/presswerk_web/live/preorder_live/show.ex:80
+#, elixir-autogen, elixir-format
+msgid "Notes"
+msgstr "Notizen"
+
+#: lib/presswerk_web/components/preorder_components.ex:36
+#, elixir-autogen, elixir-format
+msgid "November"
+msgstr "November"
+
+#: lib/presswerk_web/components/preorder_components.ex:35
+#, elixir-autogen, elixir-format
+msgid "October"
+msgstr "Oktober"
+
+#: lib/presswerk_web/live/dashboard_live.ex:22
+#, elixir-autogen, elixir-format
+msgid "Open preorders"
+msgstr "Offene Vorbestellungen"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:88
+#: lib/presswerk_web/live/preorder_live/show.ex:60
+#, elixir-autogen, elixir-format
+msgid "Ordered on"
+msgstr "Bestellt am"
+
+#: lib/presswerk_web/live/preorder_live/show.ex:22
+#, elixir-autogen, elixir-format
+msgid "Preorder deleted."
+msgstr "Vorbestellung gelöscht."
+
+#: lib/presswerk_web/live/preorder_live/form.ex:45
+#, elixir-autogen, elixir-format
+msgid "Preorder saved."
+msgstr "Vorbestellung gespeichert."
+
+#: lib/presswerk_web/components/preorder_components.ex:8
+#, elixir-autogen, elixir-format
+msgid "Preordered"
+msgstr "Vorbestellt"
+
+#: lib/presswerk_web/components/layouts.ex:57
+#: lib/presswerk_web/live/preorder_live/index.ex:10
+#: lib/presswerk_web/live/preorder_live/index.ex:48
+#, elixir-autogen, elixir-format
+msgid "Preorders"
+msgstr "Vorbestellungen"
+
+#: lib/presswerk_web/live/preorder_live/show.ex:91
+#, elixir-autogen, elixir-format
+msgid "Really delete this preorder?"
+msgstr "Diese Vorbestellung wirklich löschen?"
+
+#: lib/presswerk_web/components/preorder_components.ex:10
+#, elixir-autogen, elixir-format
+msgid "Received"
+msgstr "Erhalten"
+
+#: lib/presswerk_web/live/dashboard_live.ex:23
+#, elixir-autogen, elixir-format
+msgid "Received records"
+msgstr "Erhaltene Platten"
+
+#: lib/presswerk_web/components/layouts.ex:150
+#: lib/presswerk_web/components/layouts.ex:165
+#, elixir-autogen, elixir-format
+msgid "Reconnecting …"
+msgstr "Verbinde neu …"
+
+#: lib/presswerk_web/components/layouts.ex:57
+#, elixir-autogen, elixir-format
+msgid "Records"
+msgstr "Platten"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:103
+#: lib/presswerk_web/live/preorder_live/index.ex:124
+#: lib/presswerk_web/live/preorder_live/show.ex:62
+#, elixir-autogen, elixir-format
+msgid "Release"
+msgstr "Release"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:89
+#, elixir-autogen, elixir-format
+msgid "Release date"
+msgstr "Release-Datum"
+
+#: lib/presswerk_web/components/layouts.ex:94
+#: lib/presswerk_web/live/preorder_live/form.ex:96
+#, elixir-autogen, elixir-format
+msgid "Save"
+msgstr "Speichern"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:96
+#, elixir-autogen, elixir-format
+msgid "Saving …"
+msgstr "Speichere …"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:68
+#, elixir-autogen, elixir-format
+msgid "Search"
+msgstr "Suche"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:64
+#, elixir-autogen, elixir-format
+msgid "Search artist or album …"
+msgstr "Artist oder Album suchen …"
+
+#: lib/presswerk_web/components/preorder_components.ex:34
+#, elixir-autogen, elixir-format
+msgid "September"
+msgstr "September"
+
+#: lib/presswerk_web/components/preorder_components.ex:9
+#, elixir-autogen, elixir-format
+msgid "Shipped"
+msgstr "Versendet"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:81
+#: lib/presswerk_web/live/preorder_live/index.ex:102
+#: lib/presswerk_web/live/preorder_live/show.ex:58
+#, elixir-autogen, elixir-format
+msgid "Shop"
+msgstr "Shop"
+
+#: lib/presswerk_web/components/layouts.ex:157
+#, elixir-autogen, elixir-format
+msgid "Something went wrong"
+msgstr "Etwas ist schiefgelaufen"
+
+#: lib/presswerk_web/live/preorder_live/index.ex:80
+#, elixir-autogen, elixir-format
+msgid "Sort order"
+msgstr "Sortierung"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:85
+#: lib/presswerk_web/live/preorder_live/index.ex:70
+#: lib/presswerk_web/live/preorder_live/index.ex:104
+#, elixir-autogen, elixir-format
+msgid "Status"
+msgstr "Status"
+
+#: lib/presswerk_web/live/dashboard_live.ex:28
+#, elixir-autogen, elixir-format
+msgid "Upcoming releases"
+msgstr "Kommende Veröffentlichungen"
+
+#: lib/presswerk_web/components/layouts.ex:202
+#, elixir-autogen, elixir-format
+msgid "Use dark theme"
+msgstr "Dunkles Design verwenden"
+
+#: lib/presswerk_web/components/layouts.ex:193
+#, elixir-autogen, elixir-format
+msgid "Use light theme"
+msgstr "Helles Design verwenden"
+
+#: lib/presswerk_web/components/layouts.ex:184
+#, elixir-autogen, elixir-format
+msgid "Use system theme"
+msgstr "Systemdesign verwenden"
+
+#: lib/presswerk_web/components/layouts.ex:90
+#, elixir-autogen, elixir-format
+msgid "Language"
+msgstr "Sprache"

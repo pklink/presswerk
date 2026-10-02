@@ -42,7 +42,7 @@ defmodule Presswerk.Preorders.Preorder do
     |> validate_required([:artist, :album, :status])
     |> unique_constraint([:artist, :album],
       name: :preorders_artist_album_index,
-      message: "Diese Platte wurde bereits erfasst."
+      message: "This record has already been added."
     )
   end
 

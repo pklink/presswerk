@@ -1,6 +1,6 @@
 # Presswerk
 
-Presswerk is a small web app for tracking vinyl preorders. The UI is in German. It is designed for a single user and has no login.
+Presswerk is a small web app for tracking vinyl preorders. The UI supports English (default) and German. Selecting a language in the footer switches it automatically; the choice is stored in your browser session. It is designed for a single user and has no login.
 
 ## Features
 
@@ -41,7 +41,9 @@ Start the app with `docker compose up -d --build` and open <http://localhost:400
 
 ## Contributing
 
-Bug reports and suggestions are welcome. To contribute code, fork the repository, create a branch, and open a pull request with a short description. Run `mix precommit` (or `mise run check`) before submitting. Please keep the app simple and single-user, and preserve the German UI.
+Bug reports and suggestions are welcome. To contribute code, fork the repository, create a branch, and open a pull request with a short description. Run `mix precommit` (or `mise run check`) before submitting. Please keep the app simple and single-user, and support both UI languages.
+
+UI strings use Gettext with English source text and German translations in `priv/gettext/de/LC_MESSAGES/`. After adding strings, run `mix gettext.extract --merge` and fill in the German translations. Changeset messages are translated through the `errors` domain when displayed; add new validation messages to `priv/gettext/errors.pot`.
 
 ## License
 

@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :presswerk, PresswerkWeb.Gettext, default_locale: "en", locales: ~w(en de)
+
 config :presswerk,
   ecto_repos: [Presswerk.Repo],
   generators: [timestamp_type: :utc_datetime]

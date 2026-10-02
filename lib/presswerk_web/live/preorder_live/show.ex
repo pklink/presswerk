@@ -19,16 +19,16 @@ defmodule PresswerkWeb.PreorderLive.Show do
 
     {:noreply,
      socket
-     |> put_flash(:info, "Vorbestellung gelöscht.")
+     |> put_flash(:info, gettext("Preorder deleted."))
      |> push_navigate(to: ~p"/preorders")}
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} active={:preorders}>
+    <Layouts.app flash={@flash} active={:preorders} locale={@locale} current_path={@current_path}>
       <.link navigate={~p"/preorders"} class="text-sm text-base-content/70 hover:text-primary">
-        <.icon name="hero-arrow-left-micro" class="size-4" /> Zurück zur Übersicht
+        <.icon name="hero-arrow-left-micro" class="size-4" /> {gettext("Back to overview")}
       </.link>
 
       <div class="grid gap-6 sm:grid-cols-[12rem_minmax(0,1fr)]">
@@ -36,7 +36,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
           <img
             :if={@preorder.cover_url}
             src={@preorder.cover_url}
-            alt={"Cover von #{@preorder.album}"}
+            alt={gettext("Cover of %{album}", album: @preorder.album)}
             class="w-full aspect-square object-cover rounded-box border border-base-300"
           />
           <div
@@ -55,13 +55,13 @@ defmodule PresswerkWeb.PreorderLive.Show do
           </div>
 
           <dl class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:gap-x-6">
-            <dt class="text-base-content/60">Shop</dt>
+            <dt class="text-base-content/60">{gettext("Shop")}</dt>
             <dd class="wrap-anywhere">{@preorder.shop || "–"}</dd>
-            <dt class="text-base-content/60">Bestellt am</dt>
+            <dt class="text-base-content/60">{gettext("Ordered on")}</dt>
             <dd>{format_date(@preorder.ordered_at)}</dd>
-            <dt class="text-base-content/60">Release</dt>
+            <dt class="text-base-content/60">{gettext("Release")}</dt>
             <dd>{format_date(@preorder.release_date)}</dd>
-            <dt class="text-base-content/60">Link</dt>
+            <dt class="text-base-content/60">{gettext("Link")}</dt>
             <dd class="break-all">
               <a
                 :if={@preorder.external_url}
@@ -77,21 +77,21 @@ defmodule PresswerkWeb.PreorderLive.Show do
           </dl>
 
           <div :if={@preorder.notes}>
-            <h2 class="text-sm text-base-content/60 mb-1">Notizen</h2>
+            <h2 class="text-sm text-base-content/60 mb-1">{gettext("Notes")}</h2>
             <p class="whitespace-pre-line wrap-anywhere">{@preorder.notes}</p>
           </div>
 
           <div class="flex gap-2 pt-2">
             <.link navigate={~p"/preorders/#{@preorder}/edit"} class="btn btn-primary btn-sm">
-              <.icon name="hero-pencil-square-micro" class="size-4" /> Bearbeiten
+              <.icon name="hero-pencil-square-micro" class="size-4" /> {gettext("Edit")}
             </.link>
             <button
               id="delete-preorder"
               phx-click="delete"
-              data-confirm="Diese Vorbestellung wirklich löschen?"
+              data-confirm={gettext("Really delete this preorder?")}
               class="btn btn-ghost btn-sm text-error"
             >
-              <.icon name="hero-trash-micro" class="size-4" /> Löschen
+              <.icon name="hero-trash-micro" class="size-4" /> {gettext("Delete")}
             </button>
           </div>
         </div>

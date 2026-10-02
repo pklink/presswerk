@@ -15,7 +15,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     preorder = %Preorder{ordered_at: Date.utc_today()}
 
     socket
-    |> assign(page_title: "Neue Vorbestellung", preorder: preorder)
+    |> assign(page_title: gettext("New preorder"), preorder: preorder)
     |> assign(:form, to_form(Preorders.change_preorder(preorder)))
   end
 
@@ -23,7 +23,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     preorder = Preorders.get_preorder!(id)
 
     socket
-    |> assign(page_title: "Bearbeiten", preorder: preorder)
+    |> assign(page_title: gettext("Edit"), preorder: preorder)
     |> assign(:form, to_form(Preorders.change_preorder(preorder)))
   end
 
@@ -42,7 +42,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
       {:ok, preorder} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Vorbestellung gespeichert.")
+         |> put_flash(:info, gettext("Preorder saved."))
          |> push_navigate(to: ~p"/preorders/#{preorder}")}
 
       {:error, changeset} ->
@@ -55,7 +55,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
       {:ok, preorder} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Änderungen gespeichert.")
+         |> put_flash(:info, gettext("Changes saved."))
          |> push_navigate(to: ~p"/preorders/#{preorder}")}
 
       {:error, changeset} ->
@@ -66,29 +66,41 @@ defmodule PresswerkWeb.PreorderLive.Form do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} active={if @live_action == :new, do: :new, else: :preorders}>
+    <Layouts.app
+      flash={@flash}
+      active={if @live_action == :new, do: :new, else: :preorders}
+      locale={@locale}
+      current_path={@current_path}
+    >
       <h1 class="text-2xl font-bold">{@page_title}</h1>
 
       <.form for={@form} id="preorder-form" phx-change="validate" phx-submit="save" class="max-w-2xl">
         <div class="grid gap-x-4 sm:grid-cols-2">
-          <.input field={@form[:artist]} type="text" label="Artist *" autofocus />
-          <.input field={@form[:album]} type="text" label="Album *" />
-          <.input field={@form[:shop]} type="text" label="Shop" />
-          <.input field={@form[:status]} type="select" label="Status" options={status_options()} />
-          <.input field={@form[:ordered_at]} type="date" label="Bestellt am" />
-          <.input field={@form[:release_date]} type="date" label="Release-Datum" />
+          <.input field={@form[:artist]} type="text" label={gettext("Artist") <> " *"} autofocus />
+          <.input field={@form[:album]} type="text" label={gettext("Album") <> " *"} />
+          <.input field={@form[:shop]} type="text" label={gettext("Shop")} />
+          <.input
+            field={@form[:status]}
+            type="select"
+            label={gettext("Status")}
+            options={status_options()}
+          />
+          <.input field={@form[:ordered_at]} type="date" label={gettext("Ordered on")} />
+          <.input field={@form[:release_date]} type="date" label={gettext("Release date")} />
         </div>
-        <.input field={@form[:cover_url]} type="url" label="Cover-URL" />
-        <.input field={@form[:external_url]} type="url" label="Link (z. B. Shop-Seite)" />
-        <.input field={@form[:notes]} type="textarea" label="Notizen" rows="3" />
+        <.input field={@form[:cover_url]} type="url" label={gettext("Cover URL")} />
+        <.input field={@form[:external_url]} type="url" label={gettext("Link (e.g. shop page)")} />
+        <.input field={@form[:notes]} type="textarea" label={gettext("Notes")} rows="3" />
 
         <div class="flex gap-2 mt-2">
-          <button type="submit" class="btn btn-primary" phx-disable-with="Speichere …">Speichern</button>
+          <button type="submit" class="btn btn-primary" phx-disable-with={gettext("Saving …")}>{gettext(
+            "Save"
+          )}</button>
           <.link
             navigate={if @preorder.id, do: ~p"/preorders/#{@preorder}", else: ~p"/preorders"}
             class="btn btn-ghost"
           >
-            Abbrechen
+            {gettext("Cancel")}
           </.link>
         </div>
       </.form>

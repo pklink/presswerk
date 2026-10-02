@@ -1,0 +1,16 @@
+msgid ""
+msgstr ""
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "can't be blank"
+msgstr "darf nicht leer sein"
+
+msgid "is invalid"
+msgstr "ist ungültig"
+
+msgid "has already been taken"
+msgstr "ist bereits vergeben"
+
+msgid "This record has already been added."
+msgstr "Diese Platte wurde bereits erfasst."

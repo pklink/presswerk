@@ -9,7 +9,7 @@ defmodule PresswerkWeb.DashboardLive do
   def mount(_params, _session, socket) do
     {:ok,
      socket
-     |> assign(:page_title, "Dashboard")
+     |> assign(:page_title, gettext("Dashboard"))
      |> assign(:stats, Preorders.stats())
      |> assign(:months, Preorders.upcoming_by_month())}
   end
@@ -17,24 +17,24 @@ defmodule PresswerkWeb.DashboardLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} active={:dashboard}>
+    <Layouts.app flash={@flash} active={:dashboard} locale={@locale} current_path={@current_path}>
       <section class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <.stat label="Offene Vorbestellungen" value={@stats.open} id="stat-open" accent />
-        <.stat label="Erhaltene Platten" value={@stats.received} id="stat-received" />
-        <.stat label="Stornierte Vorbestellungen" value={@stats.cancelled} id="stat-cancelled" />
+        <.stat label={gettext("Open preorders")} value={@stats.open} id="stat-open" accent />
+        <.stat label={gettext("Received records")} value={@stats.received} id="stat-received" />
+        <.stat label={gettext("Cancelled preorders")} value={@stats.cancelled} id="stat-cancelled" />
       </section>
 
       <section>
-        <h2 class="text-xl font-bold mb-4">Kommende Veröffentlichungen</h2>
+        <h2 class="text-xl font-bold mb-4">{gettext("Upcoming releases")}</h2>
 
         <div
           :if={@months == []}
           id="upcoming-empty"
           class="rounded-box border border-dashed border-base-300 p-8 text-center text-base-content/70"
         >
-          <p>Keine offenen Vorbestellungen mit Release-Datum.</p>
+          <p>{gettext("No open preorders with a release date.")}</p>
           <.link navigate={~p"/preorders/new"} class="btn btn-primary btn-sm mt-3">
-            Vorbestellung erfassen
+            {gettext("Add preorder")}
           </.link>
         </div>
 

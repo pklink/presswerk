@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+
+msgid "can't be blank"
+msgstr ""
+
+msgid "is invalid"
+msgstr ""
+
+msgid "has already been taken"
+msgstr ""
+
+msgid "This record has already been added."
+msgstr ""

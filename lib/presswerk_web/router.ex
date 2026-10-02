@@ -4,6 +4,7 @@ defmodule PresswerkWeb.Router do
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
+    plug PresswerkWeb.Locale
     plug :fetch_live_flash
     plug :put_root_layout, html: {PresswerkWeb.Layouts, :root}
     plug :protect_from_forgery
@@ -17,11 +18,15 @@ defmodule PresswerkWeb.Router do
   scope "/", PresswerkWeb do
     pipe_through :browser
 
-    live "/", DashboardLive
-    live "/preorders", PreorderLive.Index
-    live "/preorders/new", PreorderLive.Form, :new
-    live "/preorders/:id", PreorderLive.Show
-    live "/preorders/:id/edit", PreorderLive.Form, :edit
+    post "/locale", LocaleController, :update
+
+    live_session :localized, on_mount: [PresswerkWeb.Locale] do
+      live "/", DashboardLive
+      live "/preorders", PreorderLive.Index
+      live "/preorders/new", PreorderLive.Form, :new
+      live "/preorders/:id", PreorderLive.Show
+      live "/preorders/:id/edit", PreorderLive.Form, :edit
+    end
   end
 
   # Other scopes may use custom stacks.

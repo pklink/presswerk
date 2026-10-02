@@ -12,7 +12,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
       preorder_fixture(%{status: :received})
 
       {:ok, view, html} = live(conn, ~p"/")
-      assert html =~ "Behalte deine Vinyl-Vorbestellungen im Blick."
+      assert html =~ "Keep track of your vinyl preorders."
       assert has_element?(view, "#stat-open", "1")
       assert has_element?(view, "#stat-received", "1")
       assert has_element?(view, "#month-2026-11", "Artist A")
@@ -77,7 +77,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
         |> render_submit()
         |> follow_redirect(conn)
 
-      assert html =~ "Vorbestellung gespeichert."
+      assert html =~ "Preorder saved."
       assert html =~ "Punisher"
       assert [%{artist: "Phoebe Bridgers", status: :shipped}] = Preorders.list_preorders()
     end
@@ -98,7 +98,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
         |> form("#preorder-form", preorder: %{artist: p.artist, album: p.album})
         |> render_submit()
 
-      assert html =~ "Diese Platte wurde bereits erfasst."
+      assert html =~ "This record has already been added."
     end
   end
 
@@ -121,7 +121,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
         |> render_submit()
         |> follow_redirect(conn, ~p"/preorders/#{p}")
 
-      assert html =~ "Änderungen gespeichert."
+      assert html =~ "Changes saved."
       assert html =~ "Neuer Shop"
       assert Preorders.get_preorder!(p.id).status == :received
     end
@@ -136,7 +136,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
         |> render_click()
         |> follow_redirect(conn, ~p"/preorders")
 
-      assert html =~ "Vorbestellung gelöscht."
+      assert html =~ "Preorder deleted."
       assert Preorders.list_preorders() == []
     end
   end

@@ -27,6 +27,7 @@ defmodule PresswerkWeb.CoreComponents do
 
   """
   use Phoenix.Component
+  use Gettext, backend: PresswerkWeb.Gettext
 
   alias Phoenix.LiveView.JS
 
@@ -77,7 +78,7 @@ defmodule PresswerkWeb.CoreComponents do
           <p>{msg}</p>
         </div>
         <div class="flex-1" />
-        <button type="button" class="group self-start cursor-pointer" aria-label="close">
+        <button type="button" class="group self-start cursor-pointer" aria-label={gettext("Close")}>
           <.icon name="hero-x-mark" class="size-5 opacity-40 group-hover:opacity-70" />
         </button>
       </div>
@@ -371,7 +372,7 @@ defmodule PresswerkWeb.CoreComponents do
         <tr>
           <th :for={col <- @col}>{col[:label]}</th>
           <th :if={@action != []}>
-            <span class="sr-only">Actions</span>
+            <span class="sr-only">{gettext("Actions")}</span>
           </th>
         </tr>
       </thead>
@@ -478,18 +479,11 @@ defmodule PresswerkWeb.CoreComponents do
   Translates an error message using gettext.
   """
   def translate_error({msg, opts}) do
-    # You can make use of gettext to translate error messages by
-    # uncommenting and adjusting the following code:
-
-    # if count = opts[:count] do
-    #   Gettext.dngettext(PresswerkWeb.Gettext, "errors", msg, msg, count, opts)
-    # else
-    #   Gettext.dgettext(PresswerkWeb.Gettext, "errors", msg, opts)
-    # end
-
-    Enum.reduce(opts, msg, fn {key, value}, acc ->
-      String.replace(acc, "%{#{key}}", fn _ -> to_string(value) end)
-    end)
+    if count = opts[:count] do
+      Gettext.dngettext(PresswerkWeb.Gettext, "errors", msg, msg, count, opts)
+    else
+      Gettext.dgettext(PresswerkWeb.Gettext, "errors", msg, opts)
+    end
   end
 
   @doc """

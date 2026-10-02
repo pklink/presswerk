@@ -7,7 +7,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :page_title, "Vorbestellungen")}
+    {:ok, assign(socket, :page_title, gettext("Preorders"))}
   end
 
   # Suche, Filter und Sortierung liegen in der URL (teilbar, Zurück-Button geht).
@@ -43,11 +43,11 @@ defmodule PresswerkWeb.PreorderLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <Layouts.app flash={@flash} active={:preorders}>
+    <Layouts.app flash={@flash} active={:preorders} locale={@locale} current_path={@current_path}>
       <div class="flex items-center justify-between gap-3">
-        <h1 class="text-2xl font-bold">Vorbestellungen</h1>
+        <h1 class="text-2xl font-bold">{gettext("Preorders")}</h1>
         <.link navigate={~p"/preorders/new"} class="btn btn-primary btn-sm">
-          <.icon name="hero-plus-micro" class="size-4" /> Neu
+          <.icon name="hero-plus-micro" class="size-4" /> {gettext("New")}
         </.link>
       </div>
 
@@ -61,14 +61,14 @@ defmodule PresswerkWeb.PreorderLive.Index do
           type="search"
           name="q"
           value={@search}
-          placeholder="Artist oder Album suchen …"
+          placeholder={gettext("Search artist or album …")}
           phx-debounce="200"
           autocomplete="off"
           class="input input-bordered w-full"
-          aria-label="Suche"
+          aria-label={gettext("Search")}
         />
-        <select name="status" class="select select-bordered w-full" aria-label="Status">
-          <option value="" selected={@status == ""}>Alle Status</option>
+        <select name="status" class="select select-bordered w-full" aria-label={gettext("Status")}>
+          <option value="" selected={@status == ""}>{gettext("All statuses")}</option>
           <option
             :for={{label, value} <- status_options()}
             value={value}
@@ -77,9 +77,11 @@ defmodule PresswerkWeb.PreorderLive.Index do
             {label}
           </option>
         </select>
-        <select name="sort" class="select select-bordered w-full" aria-label="Sortierung">
-          <option value="release_date" selected={@sort == :release_date}>Nach Release-Datum</option>
-          <option value="artist" selected={@sort == :artist}>Nach Artist</option>
+        <select name="sort" class="select select-bordered w-full" aria-label={gettext("Sort order")}>
+          <option value="release_date" selected={@sort == :release_date}>
+            {gettext("By release date")}
+          </option>
+          <option value="artist" selected={@sort == :artist}>{gettext("By artist")}</option>
         </select>
       </form>
 
@@ -88,18 +90,18 @@ defmodule PresswerkWeb.PreorderLive.Index do
         id="preorders-empty"
         class="rounded-box border border-dashed border-base-300 p-8 text-center text-base-content/70"
       >
-        Keine Vorbestellungen gefunden.
+        {gettext("No preorders found.")}
       </div>
 
       <div :if={@preorders != []} class="rounded-box border border-base-300">
         <table id="preorders" class="table block w-full sm:table">
           <thead>
             <tr>
-              <th class="hidden sm:table-cell">Artist</th>
-              <th class="hidden sm:table-cell">Album</th>
-              <th class="hidden sm:table-cell">Shop</th>
-              <th class="hidden sm:table-cell">Release</th>
-              <th class="hidden sm:table-cell">Status</th>
+              <th class="hidden sm:table-cell">{gettext("Artist")}</th>
+              <th class="hidden sm:table-cell">{gettext("Album")}</th>
+              <th class="hidden sm:table-cell">{gettext("Shop")}</th>
+              <th class="hidden sm:table-cell">{gettext("Release")}</th>
+              <th class="hidden sm:table-cell">{gettext("Status")}</th>
             </tr>
           </thead>
           <tbody class="block sm:table-row-group">
@@ -119,7 +121,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
               </td>
               <td class="hidden sm:table-cell text-base-content/70 wrap-anywhere">{p.shop}</td>
               <td class="order-4 col-span-2 p-0 text-sm text-base-content/70 tabular-nums sm:table-cell sm:p-3 sm:text-base sm:text-base-content">
-                <span class="sm:hidden">Release: </span>{format_date(p.release_date)}
+                <span class="sm:hidden">{gettext("Release")}: </span>{format_date(p.release_date)}
               </td>
               <td class="order-2 p-0 sm:table-cell sm:p-3"><.status_badge status={p.status} /></td>
             </tr>

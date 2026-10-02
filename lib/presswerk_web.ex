@@ -77,6 +77,7 @@ defmodule PresswerkWeb do
 
   defp html_helpers do
     quote do
+      use Gettext, backend: PresswerkWeb.Gettext
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components

@@ -27,46 +27,76 @@ defmodule PresswerkWeb.Layouts do
   """
   attr :flash, :map, required: true, doc: "the map of flash messages"
   attr :active, :atom, default: nil, doc: ":dashboard, :preorders or :new"
+  attr :locale, :string, required: true
+  attr :current_path, :string, required: true
 
   slot :inner_block, required: true
 
   def app(assigns) do
     ~H"""
-    <header class="border-b border-base-300 bg-base-200/60 backdrop-blur sticky top-0 z-10">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <.link navigate={~p"/"} class="flex items-center gap-2 group">
-          <span class="vinyl size-8 rounded-full" aria-hidden="true"></span>
-          <span class="leading-tight">
-            <span class="block text-lg font-bold tracking-tight">Presswerk</span>
-            <span class="hidden sm:block text-xs text-base-content/60">
-              Behalte deine Vinyl-Vorbestellungen im Blick.
+    <div class="min-h-dvh flex flex-col">
+      <header class="border-b border-base-300 bg-base-200/60 backdrop-blur sticky top-0 z-10">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <.link navigate={~p"/"} class="flex items-center gap-2 group">
+            <span class="vinyl size-8 rounded-full" aria-hidden="true"></span>
+            <span class="leading-tight">
+              <span class="block text-lg font-bold tracking-tight">Presswerk</span>
+              <span class="hidden sm:block text-xs text-base-content/60">
+                {gettext("Keep track of your vinyl preorders.")}
+              </span>
             </span>
-          </span>
-        </.link>
+          </.link>
 
-        <div class="ml-auto sm:hidden"><.theme_toggle /></div>
-        <nav
-          class="order-3 grid w-full grid-cols-3 gap-1 text-sm sm:order-none sm:ml-auto sm:flex sm:w-auto sm:items-center"
-          aria-label="Hauptnavigation"
+          <div class="ml-auto sm:hidden"><.theme_toggle /></div>
+          <nav
+            class="order-3 grid w-full grid-cols-3 gap-1 text-sm sm:order-none sm:ml-auto sm:flex sm:w-auto sm:items-center"
+            aria-label={gettext("Main navigation")}
+          >
+            <.nav_link navigate={~p"/"} active={@active == :dashboard}>{gettext("Dashboard")}</.nav_link>
+            <.nav_link navigate={~p"/preorders"} active={@active == :preorders}>
+              <span class="sm:hidden">{gettext("Records")}</span><span class="hidden sm:inline">{gettext(
+                "Preorders"
+              )}</span>
+            </.nav_link>
+            <.nav_link navigate={~p"/preorders/new"} active={@active == :new}>
+              <.icon name="hero-plus-micro" class="size-4" />
+              <span class="sm:hidden">{gettext("New")}</span><span class="hidden sm:inline">{gettext(
+                "New preorder"
+              )}</span>
+            </.nav_link>
+            <div class="hidden sm:block sm:ml-2"><.theme_toggle /></div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="flex-1 px-4 py-6 sm:px-6 sm:py-8">
+        <div class="mx-auto max-w-5xl space-y-6">
+          {render_slot(@inner_block)}
+        </div>
+      </main>
+
+      <footer id="app-footer" class="border-t border-base-300 px-4 py-4 sm:px-6">
+        <.form
+          for={%{}}
+          action={~p"/locale"}
+          id="locale-form"
+          class="mx-auto max-w-5xl flex flex-wrap items-end justify-end gap-2"
         >
-          <.nav_link navigate={~p"/"} active={@active == :dashboard}>Dashboard</.nav_link>
-          <.nav_link navigate={~p"/preorders"} active={@active == :preorders}>
-            <span class="sm:hidden">Platten</span><span class="hidden sm:inline">Vorbestellungen</span>
-          </.nav_link>
-          <.nav_link navigate={~p"/preorders/new"} active={@active == :new}>
-            <.icon name="hero-plus-micro" class="size-4" />
-            <span class="sm:hidden">Neu</span><span class="hidden sm:inline">Neue Vorbestellung</span>
-          </.nav_link>
-          <div class="hidden sm:block sm:ml-2"><.theme_toggle /></div>
-        </nav>
-      </div>
-    </header>
-
-    <main class="px-4 py-6 sm:px-6 sm:py-8">
-      <div class="mx-auto max-w-5xl space-y-6">
-        {render_slot(@inner_block)}
-      </div>
-    </main>
+          <input type="hidden" name="return_to" value={@current_path} />
+          <.input
+            type="select"
+            id="locale-select"
+            name="locale"
+            label={gettext("Language")}
+            value={@locale}
+            options={[{"English", "en"}, {"Deutsch", "de"}]}
+          />
+          <noscript>
+            <button type="submit" class="btn btn-sm mb-2">{gettext("Save")}</button>
+          </noscript>
+        </.form>
+      </footer>
+    </div>
 
     <.flash_group flash={@flash} />
     """
@@ -111,7 +141,7 @@ defmodule PresswerkWeb.Layouts do
       <.flash
         id="client-error"
         kind={:error}
-        title="Keine Verbindung"
+        title={gettext("No connection")}
         phx-disconnected={
           show(".phx-client-error #client-error")
           |> JS.remove_attribute("hidden", to: ".phx-client-error #client-error")
@@ -119,13 +149,14 @@ defmodule PresswerkWeb.Layouts do
         phx-connected={hide("#client-error") |> JS.set_attribute({"hidden", ""})}
         hidden
       >
-        Verbinde neu … <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
+        {gettext("Reconnecting …")}
+        <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
 
       <.flash
         id="server-error"
         kind={:error}
-        title="Etwas ist schiefgelaufen"
+        title={gettext("Something went wrong")}
         phx-disconnected={
           show(".phx-server-error #server-error")
           |> JS.remove_attribute("hidden", to: ".phx-server-error #server-error")
@@ -133,7 +164,8 @@ defmodule PresswerkWeb.Layouts do
         phx-connected={hide("#server-error") |> JS.set_attribute({"hidden", ""})}
         hidden
       >
-        Verbinde neu … <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
+        {gettext("Reconnecting …")}
+        <.icon name="hero-arrow-path" class="ml-1 size-3 motion-safe:animate-spin" />
       </.flash>
     </div>
     """
@@ -151,7 +183,7 @@ defmodule PresswerkWeb.Layouts do
 
       <button
         class="flex p-3 sm:p-2 cursor-pointer w-1/3"
-        aria-label="Systemdesign verwenden"
+        aria-label={gettext("Use system theme")}
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="system"
       >
@@ -160,7 +192,7 @@ defmodule PresswerkWeb.Layouts do
 
       <button
         class="flex p-3 sm:p-2 cursor-pointer w-1/3"
-        aria-label="Helles Design verwenden"
+        aria-label={gettext("Use light theme")}
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="light"
       >
@@ -169,7 +201,7 @@ defmodule PresswerkWeb.Layouts do
 
       <button
         class="flex p-3 sm:p-2 cursor-pointer w-1/3"
-        aria-label="Dunkles Design verwenden"
+        aria-label={gettext("Use dark theme")}
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="dark"
       >
