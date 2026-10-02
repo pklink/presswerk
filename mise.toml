@@ -1,3 +1,27 @@
 [tools]
 erlang = "latest"
 elixir = "latest"
+
+[tasks.setup]
+description = "Install dependencies, set up the database, and build assets"
+run = "mix setup"
+
+[tasks.dev]
+description = "Start the Phoenix server"
+run = "mix phx.server"
+
+[tasks.test]
+description = "Run tests"
+run = "mix test"
+
+[tasks.check]
+description = "Run precommit checks"
+run = "mix precommit"
+
+[tasks."db:migrate"]
+description = "Run database migrations"
+run = "mix ecto.migrate"
+
+[tasks."assets:build"]
+description = "Rebuild assets"
+run = "mix assets.build"
