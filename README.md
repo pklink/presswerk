@@ -41,6 +41,21 @@ Start the app with `docker compose up -d --build` and open <http://localhost:400
 
 **Note:** Presswerk has no login. The default Docker configuration publishes port 4000, so do not expose an instance with personal data to the internet without access protection.
 
+## Run the published image
+
+The image is built on every push to `main` and on version tags and published to GitHub Container Registry (GHCR) as `ghcr.io/pklink/presswerk`. Multi-arch images are available for `linux/amd64` and `linux/arm64`.
+
+```sh
+docker run -d --name presswerk \
+  -p 4000:4000 \
+  -e SECRET_KEY_BASE=<generated secret> \
+  -e PHX_HOST=localhost \
+  -v presswerk-data:/data \
+  ghcr.io/pklink/presswerk:latest
+```
+
+Pull a specific release by tag, e.g. `ghcr.io/pklink/presswerk:v0.1.0`. Generate the secret with `openssl rand -base64 48`.
+
 ## Contributing
 
 Bug reports and suggestions are welcome. To contribute code, fork the repository, create a branch, and open a pull request with a short description. Run `mix precommit` (or `mise run check`) before submitting. Please keep the app simple and single-user, and support both UI languages.
