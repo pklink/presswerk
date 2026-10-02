@@ -31,8 +31,8 @@ defmodule PresswerkWeb.PreorderLive.Show do
         <.icon name="hero-arrow-left-micro" class="size-4" /> Zurück zur Übersicht
       </.link>
 
-      <div class="grid gap-6 sm:grid-cols-[12rem_1fr]">
-        <div>
+      <div class="grid gap-6 sm:grid-cols-[12rem_minmax(0,1fr)]">
+        <div class="w-40 sm:w-full">
           <img
             :if={@preorder.cover_url}
             src={@preorder.cover_url}
@@ -49,14 +49,14 @@ defmodule PresswerkWeb.PreorderLive.Show do
 
         <div class="space-y-4 min-w-0">
           <div>
-            <p class="text-base-content/70">{@preorder.artist}</p>
-            <h1 class="text-3xl font-bold break-words">{@preorder.album}</h1>
+            <p class="text-base-content/70 wrap-anywhere">{@preorder.artist}</p>
+            <h1 class="text-3xl font-bold wrap-anywhere">{@preorder.album}</h1>
             <div class="mt-2"><.status_badge status={@preorder.status} /></div>
           </div>
 
-          <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 text-sm">
+          <dl class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:gap-x-6">
             <dt class="text-base-content/60">Shop</dt>
-            <dd>{@preorder.shop || "–"}</dd>
+            <dd class="wrap-anywhere">{@preorder.shop || "–"}</dd>
             <dt class="text-base-content/60">Bestellt am</dt>
             <dd>{format_date(@preorder.ordered_at)}</dd>
             <dt class="text-base-content/60">Release</dt>
@@ -78,7 +78,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
 
           <div :if={@preorder.notes}>
             <h2 class="text-sm text-base-content/60 mb-1">Notizen</h2>
-            <p class="whitespace-pre-line">{@preorder.notes}</p>
+            <p class="whitespace-pre-line wrap-anywhere">{@preorder.notes}</p>
           </div>
 
           <div class="flex gap-2 pt-2">

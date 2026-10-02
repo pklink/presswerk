@@ -33,7 +33,7 @@ defmodule PresswerkWeb.Layouts do
   def app(assigns) do
     ~H"""
     <header class="border-b border-base-300 bg-base-200/60 backdrop-blur sticky top-0 z-10">
-      <div class="mx-auto max-w-5xl px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-6 gap-y-3">
         <.link navigate={~p"/"} class="flex items-center gap-2 group">
           <span class="vinyl size-8 rounded-full" aria-hidden="true"></span>
           <span class="leading-tight">
@@ -44,20 +44,25 @@ defmodule PresswerkWeb.Layouts do
           </span>
         </.link>
 
-        <nav class="flex items-center gap-1 text-sm ml-auto" aria-label="Hauptnavigation">
+        <div class="ml-auto sm:hidden"><.theme_toggle /></div>
+        <nav
+          class="order-3 grid w-full grid-cols-3 gap-1 text-sm sm:order-none sm:ml-auto sm:flex sm:w-auto sm:items-center"
+          aria-label="Hauptnavigation"
+        >
           <.nav_link navigate={~p"/"} active={@active == :dashboard}>Dashboard</.nav_link>
           <.nav_link navigate={~p"/preorders"} active={@active == :preorders}>
-            Vorbestellungen
+            <span class="sm:hidden">Platten</span><span class="hidden sm:inline">Vorbestellungen</span>
           </.nav_link>
           <.nav_link navigate={~p"/preorders/new"} active={@active == :new}>
-            <.icon name="hero-plus-micro" class="size-4" /> Neue Vorbestellung
+            <.icon name="hero-plus-micro" class="size-4" />
+            <span class="sm:hidden">Neu</span><span class="hidden sm:inline">Neue Vorbestellung</span>
           </.nav_link>
-          <div class="hidden md:block ml-2"><.theme_toggle /></div>
+          <div class="hidden sm:block sm:ml-2"><.theme_toggle /></div>
         </nav>
       </div>
     </header>
 
-    <main class="px-4 py-8 sm:px-6">
+    <main class="px-4 py-6 sm:px-6 sm:py-8">
       <div class="mx-auto max-w-5xl space-y-6">
         {render_slot(@inner_block)}
       </div>
@@ -77,7 +82,7 @@ defmodule PresswerkWeb.Layouts do
       navigate={@navigate}
       aria-current={@active && "page"}
       class={[
-        "px-3 py-1.5 rounded-md flex items-center gap-1 transition-colors whitespace-nowrap",
+        "min-h-11 px-2 sm:px-3 rounded-md flex items-center justify-center gap-1 transition-colors whitespace-nowrap",
         @active && "bg-primary text-primary-content font-medium",
         !@active && "hover:bg-base-300"
       ]}
@@ -145,7 +150,8 @@ defmodule PresswerkWeb.Layouts do
       <div class="absolute w-1/3 h-full rounded-full border-1 border-base-200 bg-base-100 brightness-200 left-0 [[data-theme=light]_&]:left-1/3 [[data-theme=dark]_&]:left-2/3 [[data-theme-source=system]_&]:!left-0 transition-[left]" />
 
       <button
-        class="flex p-2 cursor-pointer w-1/3"
+        class="flex p-3 sm:p-2 cursor-pointer w-1/3"
+        aria-label="Systemdesign verwenden"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="system"
       >
@@ -153,7 +159,8 @@ defmodule PresswerkWeb.Layouts do
       </button>
 
       <button
-        class="flex p-2 cursor-pointer w-1/3"
+        class="flex p-3 sm:p-2 cursor-pointer w-1/3"
+        aria-label="Helles Design verwenden"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="light"
       >
@@ -161,7 +168,8 @@ defmodule PresswerkWeb.Layouts do
       </button>
 
       <button
-        class="flex p-2 cursor-pointer w-1/3"
+        class="flex p-3 sm:p-2 cursor-pointer w-1/3"
+        aria-label="Dunkles Design verwenden"
         phx-click={JS.dispatch("phx:set-theme")}
         data-phx-theme="dark"
       >

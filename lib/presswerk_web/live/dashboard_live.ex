@@ -47,15 +47,15 @@ defmodule PresswerkWeb.DashboardLive do
               <li :for={p <- preorders}>
                 <.link
                   navigate={~p"/preorders/#{p}"}
-                  class="flex items-center justify-between gap-3 px-4 py-3 hover:bg-base-200"
+                  class="flex flex-col items-start gap-2 px-4 py-3 hover:bg-base-200 sm:flex-row sm:items-center sm:justify-between sm:gap-3"
                 >
-                  <span class="min-w-0">
+                  <span class="min-w-0 wrap-anywhere">
                     <span class="font-medium">{p.artist}</span>
                     <span class="text-base-content/60"> – </span>
                     <span>{p.album}</span>
                   </span>
                   <span class="flex items-center gap-3 shrink-0 text-sm text-base-content/60">
-                    <span class="hidden sm:inline">{format_date(p.release_date)}</span>
+                    <span>{format_date(p.release_date)}</span>
                     <.status_badge status={p.status} />
                   </span>
                 </.link>

@@ -67,7 +67,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
           class="input input-bordered w-full"
           aria-label="Suche"
         />
-        <select name="status" class="select select-bordered" aria-label="Status">
+        <select name="status" class="select select-bordered w-full" aria-label="Status">
           <option value="" selected={@status == ""}>Alle Status</option>
           <option
             :for={{label, value} <- status_options()}
@@ -77,7 +77,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
             {label}
           </option>
         </select>
-        <select name="sort" class="select select-bordered" aria-label="Sortierung">
+        <select name="sort" class="select select-bordered w-full" aria-label="Sortierung">
           <option value="release_date" selected={@sort == :release_date}>Nach Release-Datum</option>
           <option value="artist" selected={@sort == :artist}>Nach Artist</option>
         </select>
@@ -91,31 +91,37 @@ defmodule PresswerkWeb.PreorderLive.Index do
         Keine Vorbestellungen gefunden.
       </div>
 
-      <div :if={@preorders != []} class="overflow-x-auto rounded-box border border-base-300">
-        <table id="preorders" class="table">
+      <div :if={@preorders != []} class="rounded-box border border-base-300">
+        <table id="preorders" class="table block w-full sm:table">
           <thead>
             <tr>
-              <th>Artist</th>
-              <th>Album</th>
+              <th class="hidden sm:table-cell">Artist</th>
+              <th class="hidden sm:table-cell">Album</th>
               <th class="hidden sm:table-cell">Shop</th>
-              <th>Release</th>
-              <th>Status</th>
+              <th class="hidden sm:table-cell">Release</th>
+              <th class="hidden sm:table-cell">Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="block sm:table-row-group">
             <tr
               :for={p <- @preorders}
               id={"preorder-#{p.id}"}
-              class="hover:bg-base-200 cursor-pointer"
+              class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-1 border-b border-base-300 p-4 last:border-b-0 sm:table-row sm:border-0 sm:p-0 hover:bg-base-200 cursor-pointer"
               phx-click={JS.navigate(~p"/preorders/#{p}")}
             >
-              <td class="font-medium">
-                <.link navigate={~p"/preorders/#{p}"} class="hover:text-primary">{p.artist}</.link>
+              <td class="order-1 min-w-0 p-0 font-medium sm:table-cell sm:p-3">
+                <.link navigate={~p"/preorders/#{p}"} class="wrap-anywhere hover:text-primary">
+                  {p.artist}
+                </.link>
               </td>
-              <td>{p.album}</td>
-              <td class="hidden sm:table-cell text-base-content/70">{p.shop}</td>
-              <td class="whitespace-nowrap tabular-nums">{format_date(p.release_date)}</td>
-              <td><.status_badge status={p.status} /></td>
+              <td class="order-3 col-span-2 min-w-0 p-0 wrap-anywhere sm:table-cell sm:p-3">
+                {p.album}
+              </td>
+              <td class="hidden sm:table-cell text-base-content/70 wrap-anywhere">{p.shop}</td>
+              <td class="order-4 col-span-2 p-0 text-sm text-base-content/70 tabular-nums sm:table-cell sm:p-3 sm:text-base sm:text-base-content">
+                <span class="sm:hidden">Release: </span>{format_date(p.release_date)}
+              </td>
+              <td class="order-2 p-0 sm:table-cell sm:p-3"><.status_badge status={p.status} /></td>
             </tr>
           </tbody>
         </table>
