@@ -1,8 +1,8 @@
 # Presswerk
 
-**Keep track of your vinyl preorders.** Presswerk is a small, self-hosted app for one person. No login, no external services - just your records in a local SQLite database.
+**Keep track of your vinyl preorders.** Presswerk (German for "pressing plant", pronounced /ˈpʁɛsˌvɛʁk/) is a small, self-hosted app for one person. No login, no external services - just your records in a local SQLite database.
 
-<p align="center">
+<p>
   <img src="docs/screenshots/dashboard.png" alt="Presswerk dashboard with preorder counts and upcoming releases grouped by month" width="960">
 </p>
 
@@ -17,8 +17,8 @@ The UI supports English (default) and German. Switch languages in the footer; yo
 
 ## Screenshots
 
-| Preorders on desktop | Preorders on mobile |
-| :--- | :--- |
+| Preorders on desktop                                                                                                                    | Preorders on mobile                                                                                                                    |
+|:----------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="docs/screenshots/preorders.png" alt="Desktop preorder list with search, status filter, and release-date sorting" width="800"> | <img src="docs/screenshots/preorders-mobile.png" alt="Mobile preorder list with stacked filters and compact record cards" width="260"> |
 
 ## Quick start
