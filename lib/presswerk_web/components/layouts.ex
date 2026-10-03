@@ -77,7 +77,16 @@ defmodule PresswerkWeb.Layouts do
 
       <footer id="app-footer" class="border-t border-base-300 px-4 py-4 sm:px-6">
         <div class="mx-auto max-w-5xl flex flex-wrap items-start justify-between gap-2">
-          <span class="text-xs text-base-content/60">v{to_string(Application.spec(:presswerk, :vsn))}</span>
+          <div class="space-y-1 text-xs text-base-content/60">
+            <p>
+              Presswerk
+              <a
+                href="https://github.com/pklink/presswerk"
+                class="font-medium text-base-content underline decoration-base-content/30 underline-offset-4 hover:text-primary"
+              >{gettext("on GitHub")}</a>
+            </p>
+            <p>v{to_string(Application.spec(:presswerk, :vsn))}</p>
+          </div>
           <.form
             for={%{}}
             action={~p"/locale"}

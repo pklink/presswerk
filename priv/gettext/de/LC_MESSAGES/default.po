@@ -357,3 +357,8 @@ msgstr "Systemdesign verwenden"
 #, elixir-autogen, elixir-format
 msgid "Language"
 msgstr "Sprache"
+
+#: lib/presswerk_web/components/layouts.ex
+#, elixir-autogen, elixir-format
+msgid "on GitHub"
+msgstr "auf GitHub"
