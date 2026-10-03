@@ -39,14 +39,23 @@ defmodule Presswerk.Preorders.Preorder do
       :order_url,
       :notes
     ])
-    |> update_change(:artist, &trim/1)
+    |> update_change(:artist, &trim_artist/1)
     |> update_change(:album, &trim/1)
-    |> validate_required([:artist, :album, :status])
+    |> validate_required([:album, :status])
     |> unique_constraint([:artist, :album],
       name: :preorders_artist_album_index,
       message: "This record has already been added."
     )
   end
+
+  defp trim_artist(value) when is_binary(value) do
+    case String.trim(value) do
+      "" -> nil
+      artist -> artist
+    end
+  end
+
+  defp trim_artist(value), do: value
 
   defp trim(value) when is_binary(value), do: String.trim(value)
   defp trim(value), do: value

@@ -76,7 +76,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
 
       <.form for={@form} id="preorder-form" phx-change="validate" phx-submit="save" class="max-w-2xl">
         <div class="grid gap-x-4 sm:grid-cols-2">
-          <.input field={@form[:artist]} type="text" label={gettext("Artist") <> " *"} autofocus />
+          <.input field={@form[:artist]} type="text" label={gettext("Artist")} autofocus />
           <.input field={@form[:album]} type="text" label={gettext("Album") <> " *"} />
           <.input field={@form[:shop]} type="text" label={gettext("Shop")} />
           <.input

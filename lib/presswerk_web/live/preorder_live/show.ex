@@ -9,8 +9,12 @@ defmodule PresswerkWeb.PreorderLive.Show do
   def mount(%{"id" => id}, _session, socket) do
     preorder = Preorders.get_preorder!(id)
 
-    {:ok,
-     assign(socket, page_title: "#{preorder.artist} – #{preorder.album}", preorder: preorder)}
+    title =
+      if is_nil(preorder.artist),
+        do: preorder.album,
+        else: "#{preorder.artist} – #{preorder.album}"
+
+    {:ok, assign(socket, page_title: title, preorder: preorder)}
   end
 
   @impl true
@@ -49,7 +53,9 @@ defmodule PresswerkWeb.PreorderLive.Show do
 
         <div class="space-y-4 min-w-0">
           <div>
-            <p class="text-base-content/70 wrap-anywhere">{@preorder.artist}</p>
+            <p :if={@preorder.artist} class="text-base-content/70 wrap-anywhere">
+              {@preorder.artist}
+            </p>
             <h1 class="text-3xl font-bold wrap-anywhere">{@preorder.album}</h1>
             <div class="mt-2"><.status_badge status={@preorder.status} /></div>
           </div>

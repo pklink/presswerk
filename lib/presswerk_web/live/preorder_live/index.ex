@@ -111,13 +111,17 @@ defmodule PresswerkWeb.PreorderLive.Index do
               class="grid grid-cols-[minmax(0,1fr)_auto] gap-x-3 gap-y-1 border-b border-base-300 p-4 last:border-b-0 sm:table-row sm:border-0 sm:p-0 hover:bg-base-200 cursor-pointer"
               phx-click={JS.navigate(~p"/preorders/#{p}")}
             >
-              <td class="order-1 min-w-0 p-0 font-medium sm:table-cell sm:p-3">
-                <.link navigate={~p"/preorders/#{p}"} class="wrap-anywhere hover:text-primary">
-                  {p.artist}
-                </.link>
+              <td class={[
+                "order-1 min-w-0 p-0 font-medium sm:table-cell sm:p-3",
+                is_nil(p.artist) && "hidden sm:table-cell"
+              ]}>
+                {p.artist}
               </td>
-              <td class="order-3 col-span-2 min-w-0 p-0 wrap-anywhere sm:table-cell sm:p-3">
-                {p.album}
+              <td class={[
+                "col-span-2 min-w-0 p-0 wrap-anywhere sm:table-cell sm:p-3",
+                if(is_nil(p.artist), do: "order-1 font-medium", else: "order-3")
+              ]}>
+                <.link navigate={~p"/preorders/#{p}"} class="hover:text-primary">{p.album}</.link>
               </td>
               <td class="hidden sm:table-cell text-base-content/70 wrap-anywhere">{p.shop}</td>
               <td class="order-4 col-span-2 p-0 text-sm text-base-content/70 tabular-nums sm:table-cell sm:p-3 sm:text-base sm:text-base-content">

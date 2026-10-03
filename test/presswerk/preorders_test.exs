@@ -31,9 +31,29 @@ defmodule Presswerk.PreordersTest do
       assert p.status == :shipped
     end
 
-    test "Artist und Album sind Pflicht" do
+    test "Album ist Pflicht" do
       assert {:error, cs} = Preorders.create_preorder(%{})
-      assert %{artist: ["can't be blank"], album: ["can't be blank"]} = errors_on(cs)
+      assert %{album: ["can't be blank"]} = errors_on(cs)
+    end
+
+    test "Artist ist optional, auch beim Bearbeiten" do
+      assert {:ok, p} = Preorders.create_preorder(%{album: "Ohne Interpret"})
+      assert p.artist == nil
+      assert {:ok, p} = Preorders.update_preorder(p, %{artist: "Jetzt mit Interpret"})
+      assert {:ok, p} = Preorders.update_preorder(p, %{artist: ""})
+      assert p.artist == nil
+    end
+
+    test "Album ohne Artist bleibt eindeutig" do
+      assert {:ok, _} = Preorders.create_preorder(%{album: "Ohne Interpret"})
+      assert {:error, cs} = Preorders.create_preorder(%{album: "Ohne Interpret"})
+      assert %{artist: ["This record has already been added."]} = errors_on(cs)
+    end
+
+    test "Artist nur mit Leerzeichen wird NULL" do
+      assert {:ok, p} = Preorders.create_preorder(%{artist: "   ", album: "Leerzeichen"})
+      assert p.artist == nil
+      assert Preorders.get_preorder!(p.id).artist == nil
     end
 
     test "ungültiger Status wird abgelehnt" do
@@ -64,7 +84,8 @@ defmodule Presswerk.PreordersTest do
     test "validiert und schützt vor Dubletten" do
       a = preorder_fixture()
       b = preorder_fixture()
-      assert {:error, _} = Preorders.update_preorder(b, %{artist: ""})
+      assert {:error, cs} = Preorders.update_preorder(b, %{album: ""})
+      assert %{album: ["can't be blank"]} = errors_on(cs)
 
       assert {:error, cs} = Preorders.update_preorder(b, %{artist: a.artist, album: a.album})
       assert %{artist: ["This record has already been added."]} = errors_on(cs)
