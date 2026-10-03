@@ -27,6 +27,12 @@ msgstr ""
 msgid "Album"
 msgstr ""
 
+#: lib/presswerk_web/live/preorder_live/form.ex:92
+#: lib/presswerk_web/live/preorder_live/show.ex:64
+#, elixir-autogen, elixir-format
+msgid "Article URL"
+msgstr ""
+
 #: lib/presswerk_web/live/preorder_live/index.ex:71
 #, elixir-autogen, elixir-format
 msgid "All statuses"
@@ -145,16 +151,6 @@ msgstr ""
 msgid "Keep track of your vinyl preorders."
 msgstr ""
 
-#: lib/presswerk_web/live/preorder_live/show.ex:64
-#, elixir-autogen, elixir-format
-msgid "Link"
-msgstr ""
-
-#: lib/presswerk_web/live/preorder_live/form.ex:92
-#, elixir-autogen, elixir-format
-msgid "Link (e.g. shop page)"
-msgstr ""
-
 #: lib/presswerk_web/components/layouts.ex:53
 #, elixir-autogen, elixir-format
 msgid "Main navigation"
@@ -222,6 +218,12 @@ msgstr ""
 #: lib/presswerk_web/live/preorder_live/show.ex:60
 #, elixir-autogen, elixir-format
 msgid "Ordered on"
+msgstr ""
+
+#: lib/presswerk_web/live/preorder_live/form.ex:93
+#: lib/presswerk_web/live/preorder_live/show.ex:77
+#, elixir-autogen, elixir-format
+msgid "Order URL"
 msgstr ""
 
 #: lib/presswerk_web/live/preorder_live/show.ex:22

@@ -82,6 +82,29 @@ defmodule PresswerkWeb.PreorderLiveTest do
       assert [%{artist: "Phoebe Bridgers", status: :shipped}] = Preorders.list_preorders()
     end
 
+    test "speichert und zeigt Artikel- und Bestell-URL", %{conn: conn} do
+      {:ok, view, _} = live(conn, ~p"/preorders/new")
+      article_url = "https://example.com/article"
+      order_url = "https://example.com/orders/123"
+
+      {:ok, _show, html} =
+        view
+        |> form("#preorder-form",
+          preorder: %{
+            artist: "Artist",
+            album: "Album",
+            article_url: article_url,
+            order_url: order_url
+          }
+        )
+        |> render_submit()
+        |> follow_redirect(conn)
+
+      assert html =~ ~s(href="#{article_url}")
+      assert html =~ ~s(href="#{order_url}")
+      assert [%{article_url: ^article_url, order_url: ^order_url}] = Preorders.list_preorders()
+    end
+
     test "validiert Pflichtfelder", %{conn: conn} do
       {:ok, view, _} = live(conn, ~p"/preorders/new")
 

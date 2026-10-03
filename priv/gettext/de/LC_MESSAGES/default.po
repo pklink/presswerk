@@ -19,6 +19,12 @@ msgstr "Vorbestellung erfassen"
 msgid "Album"
 msgstr "Album"
 
+#: lib/presswerk_web/live/preorder_live/form.ex:92
+#: lib/presswerk_web/live/preorder_live/show.ex:64
+#, elixir-autogen, elixir-format
+msgid "Article URL"
+msgstr "Artikel-URL"
+
 #: lib/presswerk_web/live/preorder_live/index.ex:71
 #, elixir-autogen, elixir-format
 msgid "All statuses"
@@ -137,16 +143,6 @@ msgstr "Juni"
 msgid "Keep track of your vinyl preorders."
 msgstr "Behalte deine Vinyl-Vorbestellungen im Blick."
 
-#: lib/presswerk_web/live/preorder_live/show.ex:64
-#, elixir-autogen, elixir-format
-msgid "Link"
-msgstr "Link"
-
-#: lib/presswerk_web/live/preorder_live/form.ex:92
-#, elixir-autogen, elixir-format
-msgid "Link (e.g. shop page)"
-msgstr "Link (z. B. Shop-Seite)"
-
 #: lib/presswerk_web/components/layouts.ex:53
 #, elixir-autogen, elixir-format
 msgid "Main navigation"
@@ -215,6 +211,12 @@ msgstr "Offene Vorbestellungen"
 #, elixir-autogen, elixir-format
 msgid "Ordered on"
 msgstr "Bestellt am"
+
+#: lib/presswerk_web/live/preorder_live/form.ex:93
+#: lib/presswerk_web/live/preorder_live/show.ex:77
+#, elixir-autogen, elixir-format
+msgid "Order URL"
+msgstr "Bestell-URL"
 
 #: lib/presswerk_web/live/preorder_live/show.ex:22
 #, elixir-autogen, elixir-format

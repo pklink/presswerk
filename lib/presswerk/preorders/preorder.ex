@@ -12,7 +12,8 @@ defmodule Presswerk.Preorders.Preorder do
     field :release_date, :date
     field :status, Ecto.Enum, values: @statuses, default: :preordered
     field :cover_url, :string
-    field :external_url, :string
+    field :article_url, :string
+    field :order_url, :string
     field :notes, :string
 
     timestamps(type: :utc_datetime)
@@ -34,7 +35,8 @@ defmodule Presswerk.Preorders.Preorder do
       :release_date,
       :status,
       :cover_url,
-      :external_url,
+      :article_url,
+      :order_url,
       :notes
     ])
     |> update_change(:artist, &trim/1)

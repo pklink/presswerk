@@ -61,18 +61,31 @@ defmodule PresswerkWeb.PreorderLive.Show do
             <dd>{format_date(@preorder.ordered_at)}</dd>
             <dt class="text-base-content/60">{gettext("Release")}</dt>
             <dd>{format_date(@preorder.release_date)}</dd>
-            <dt class="text-base-content/60">{gettext("Link")}</dt>
+            <dt class="text-base-content/60">{gettext("Article URL")}</dt>
             <dd class="break-all">
               <a
-                :if={@preorder.external_url}
-                href={@preorder.external_url}
+                :if={@preorder.article_url}
+                href={@preorder.article_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="link link-primary"
               >
-                {@preorder.external_url}
+                {@preorder.article_url}
               </a>
-              <span :if={!@preorder.external_url}>–</span>
+              <span :if={!@preorder.article_url}>–</span>
+            </dd>
+            <dt class="text-base-content/60">{gettext("Order URL")}</dt>
+            <dd class="break-all">
+              <a
+                :if={@preorder.order_url}
+                href={@preorder.order_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link link-primary"
+              >
+                {@preorder.order_url}
+              </a>
+              <span :if={!@preorder.order_url}>–</span>
             </dd>
           </dl>
 
