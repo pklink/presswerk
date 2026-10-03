@@ -9,7 +9,7 @@ run = "mix setup && git config core.hooksPath .githooks"
 
 [tasks.dev]
 description = "Start the Phoenix server"
-run = "mix phx.server"
+run = "mix compile.app --force && mix phx.server"
 
 [tasks.opencode]
 description = "Start OpenCode"
