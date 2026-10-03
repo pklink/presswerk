@@ -76,25 +76,28 @@ defmodule PresswerkWeb.Layouts do
       </main>
 
       <footer id="app-footer" class="border-t border-base-300 px-4 py-4 sm:px-6">
-        <.form
-          for={%{}}
-          action={~p"/locale"}
-          id="locale-form"
-          class="mx-auto max-w-5xl flex flex-wrap items-end justify-end gap-2"
-        >
-          <input type="hidden" name="return_to" value={@current_path} />
-          <.input
-            type="select"
-            id="locale-select"
-            name="locale"
-            label={gettext("Language")}
-            value={@locale}
-            options={[{"English", "en"}, {"Deutsch", "de"}]}
-          />
-          <noscript>
-            <button type="submit" class="btn btn-sm mb-2">{gettext("Save")}</button>
-          </noscript>
-        </.form>
+        <div class="mx-auto max-w-5xl flex flex-wrap items-start justify-between gap-2">
+          <span class="text-xs text-base-content/60">v{to_string(Application.spec(:presswerk, :vsn))}</span>
+          <.form
+            for={%{}}
+            action={~p"/locale"}
+            id="locale-form"
+            class="ml-auto flex flex-wrap items-end gap-2"
+          >
+            <input type="hidden" name="return_to" value={@current_path} />
+            <.input
+              type="select"
+              id="locale-select"
+              name="locale"
+              label={gettext("Language")}
+              value={@locale}
+              options={[{"English", "en"}, {"Deutsch", "de"}]}
+            />
+            <noscript>
+              <button type="submit" class="btn btn-sm mb-2">{gettext("Save")}</button>
+            </noscript>
+          </.form>
+        </div>
       </footer>
     </div>
 
