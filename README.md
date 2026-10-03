@@ -45,7 +45,7 @@ Start the app with `docker compose up -d --build` and open <http://localhost:400
 
 ## Run the published image
 
-The image is built on every push to `main` and on version tags and published to GitHub Container Registry (GHCR) as `ghcr.io/pklink/presswerk`. Multi-arch images are available for `linux/amd64` and `linux/arm64`.
+The image is built on every push to `main` (`dev`) and on version tags (`latest` and `vX.Y.Z`) and published to GitHub Container Registry (GHCR) as `ghcr.io/pklink/presswerk`. Multi-arch images are available for `linux/amd64` and `linux/arm64`.
 
 ```sh
 docker run -d --name presswerk \
@@ -56,7 +56,7 @@ docker run -d --name presswerk \
   ghcr.io/pklink/presswerk:latest
 ```
 
-Pull a specific release by tag, e.g. `ghcr.io/pklink/presswerk:v0.1.0`. Generate the secret with `openssl rand -base64 48`.
+Pull a specific release by tag, e.g. `ghcr.io/pklink/presswerk:v0.1.1`. Generate the secret with `openssl rand -base64 48`.
 
 ## Contributing
 
