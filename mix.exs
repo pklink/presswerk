@@ -4,7 +4,7 @@ defmodule Presswerk.MixProject do
   def project do
     [
       app: :presswerk,
-      version: "0.2.0",
+      version: "0.2.1-dev",
       elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
