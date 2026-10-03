@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/pklink/presswerk/releases/tag/v0.2.1) - 2026-10-04
+
+- Made preorder artists optional. Blank artists are stored as NULL, and the database migration preserves artist-and-album uniqueness for artistless records.
+- Updated preorder lists, detail pages, and the dashboard to display records without an artist.
+- Run database migrations before starting the development server with `mise run dev`.
+
 ## [0.2.0](https://github.com/pklink/presswerk/releases/tag/v0.2.0) - 2026-10-03
 
 - Added separate article and order URLs for preorders, with English and German labels.
