@@ -23,6 +23,15 @@ run = "mix test"
 description = "Run precommit checks"
 run = "mix precommit"
 
+[tasks.release]
+description = "Commit and tag a release, then start the next -dev version locally"
+usage = '''
+arg "<part>" help="Version part to bump" {
+  choices "patch" "minor" "major"
+}
+'''
+run = 'elixir scripts/release.exs "${usage_part?}"'
+
 [tasks."db:migrate"]
 description = "Run database migrations"
 run = "mix ecto.migrate"

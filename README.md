@@ -29,6 +29,8 @@ Open <http://localhost:4000>. `mise run setup` installs dependencies, sets up th
 mise run check
 ```
 
+To prepare a release, run `mise run release -- patch` (or `minor` / `major`) with a clean working tree. The task checks the project, commits and tags the release (e.g. `v0.1.1`), then commits the next development version (`0.1.2-dev`). It does not push; push the commits and tag when ready.
+
 ## Run with Docker
 
 Generate a secret once with `openssl rand -base64 48` and store it in a `.env` file next to `docker-compose.yml`:
