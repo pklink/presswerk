@@ -1,6 +1,10 @@
 # Presswerk
 
-Presswerk is a small web app for tracking vinyl preorders. The UI supports English (default) and German. Selecting a language in the footer switches it automatically; the choice is stored in your browser session. It is designed for a single user and has no login.
+**Keep track of your vinyl preorders.** Presswerk is a small, self-hosted app for one person. No login, no external services - just your records in a local SQLite database.
+
+<p align="center">
+  <img src="docs/screenshots/dashboard.png" alt="Presswerk dashboard with preorder counts and upcoming releases grouped by month" width="960">
+</p>
 
 ## Features
 
@@ -9,11 +13,15 @@ Presswerk is a small web app for tracking vinyl preorders. The UI supports Engli
 - View status counts and upcoming releases grouped by month on the dashboard
 - Search by artist or album, filter by status, and sort by release date or artist
 
-Presswerk is built with Elixir, Phoenix LiveView, and SQLite. Data is stored in a local SQLite database; no external services are required.
+The UI supports English (default) and German. Switch languages in the footer; your choice is stored in your browser session. Built with Elixir, Phoenix LiveView, and SQLite.
 
-**AI disclosure:** A large part of the code in this project is AI-generated.
+## Screenshots
 
-## Run locally
+| Preorders on desktop | Preorders on mobile |
+| :--- | :--- |
+| <img src="docs/screenshots/preorders.png" alt="Desktop preorder list with search, status filter, and release-date sorting" width="800"> | <img src="docs/screenshots/preorders-mobile.png" alt="Mobile preorder list with stacked filters and compact record cards" width="260"> |
+
+## Quick start
 
 Install [mise](https://mise.jdx.dev) and Git, then run from the project directory:
 
@@ -23,15 +31,11 @@ mise run setup
 mise run dev
 ```
 
-Open <http://localhost:4000>. `mise run setup` installs dependencies, sets up the database, and builds assets. To run tests and checks:
-
-```sh
-mise run check
-```
-
-To prepare a release, run `mise run release -- patch` (or `minor` / `major`) with a clean working tree. The task checks the project, commits and tags the release (e.g. `v0.1.1`), then commits the next development version (`0.1.2-dev`). It does not push; push the commits and tag when ready.
+Open <http://localhost:4000>. `mise run setup` installs dependencies, sets up the database, and builds assets.
 
 ## Run with Docker
+
+### Docker Compose
 
 Generate a secret once with `openssl rand -base64 48` and store it in a `.env` file next to `docker-compose.yml`:
 
@@ -43,7 +47,7 @@ Start the app with `docker compose up -d --build` and open <http://localhost:400
 
 **Note:** Presswerk has no login. The default Docker configuration publishes port 4000, so do not expose an instance with personal data to the internet without access protection.
 
-## Run the published image
+### Published image
 
 The image is built on every push to `main` (`dev`) and on version tags (`latest` and `vX.Y.Z`) and published to GitHub Container Registry (GHCR) as `ghcr.io/pklink/presswerk`. Multi-arch images are available for `linux/amd64` and `linux/arm64`.
 
@@ -58,11 +62,21 @@ docker run -d --name presswerk \
 
 Pull a specific release by tag, e.g. `ghcr.io/pklink/presswerk:v0.1.1`. Generate the secret with `openssl rand -base64 48`.
 
-## Contributing
+## Development and contributing
 
-Bug reports and suggestions are welcome. To contribute code, fork the repository, create a branch, and open a pull request with a short description. Run `mix precommit` (or `mise run check`) before submitting. Please keep the app simple and single-user, and support both UI languages.
+To run tests and checks:
+
+```sh
+mise run check
+```
+
+Bug reports and suggestions are welcome. To contribute code, fork the repository, create a branch, run the checks above, and open a pull request with a short description. Please keep the app simple and single-user, and support both UI languages.
 
 UI strings use Gettext with English source text and German translations in `priv/gettext/de/LC_MESSAGES/`. After adding strings, run `mix gettext.extract --merge` and fill in the German translations. Changeset messages are translated through the `errors` domain when displayed; add new validation messages to `priv/gettext/errors.pot`.
+
+To prepare a release, run `mise run release -- patch` (or `minor` / `major`) with a clean working tree. The task checks the project, commits and tags the release (e.g. `v0.1.1`), then commits the next development version (`0.1.2-dev`). It does not push; push the commits and tag when ready.
+
+**AI disclosure:** A large part of the code in this project is AI-generated.
 
 ## License
 
