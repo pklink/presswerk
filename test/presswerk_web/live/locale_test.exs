@@ -1,5 +1,5 @@
 defmodule PresswerkWeb.LocaleTest do
-  use PresswerkWeb.ConnCase, async: true
+  use PresswerkWeb.ConnCase
 
   import Phoenix.LiveViewTest
   import Presswerk.PreordersFixtures
