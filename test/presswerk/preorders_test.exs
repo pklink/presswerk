@@ -1,5 +1,5 @@
 defmodule Presswerk.PreordersTest do
-  use Presswerk.DataCase, async: true
+  use Presswerk.DataCase
 
   import Presswerk.PreordersFixtures
 
