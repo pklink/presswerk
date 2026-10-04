@@ -8,7 +8,21 @@ defmodule PresswerkWeb.PreorderLive.Form do
 
   @impl true
   def mount(params, _session, socket) do
-    {:ok, apply_action(socket, socket.assigns.live_action, params)}
+    preorders = Preorders.list_preorders()
+
+    {:ok,
+     socket
+     |> assign(:artist_options, suggestions(preorders, :artist))
+     |> assign(:shop_options, suggestions(preorders, :shop))
+     |> apply_action(socket.assigns.live_action, params)}
+  end
+
+  defp suggestions(preorders, field) do
+    preorders
+    |> Enum.map(&Map.get(&1, field))
+    |> Enum.filter(&(is_binary(&1) and String.trim(&1) != ""))
+    |> Enum.uniq()
+    |> Enum.sort()
   end
 
   defp apply_action(socket, :new, _params) do
@@ -76,9 +90,26 @@ defmodule PresswerkWeb.PreorderLive.Form do
 
       <.form for={@form} id="preorder-form" phx-change="validate" phx-submit="save" class="max-w-2xl">
         <div class="grid gap-x-4 sm:grid-cols-2">
-          <.input field={@form[:artist]} type="text" label={gettext("Artist")} autofocus />
+          <.input
+            field={@form[:artist]}
+            type="text"
+            label={gettext("Artist")}
+            list="artist-suggestions"
+            autofocus
+          />
+          <datalist id="artist-suggestions">
+            <option :for={artist <- @artist_options} value={artist} />
+          </datalist>
           <.input field={@form[:album]} type="text" label={gettext("Album") <> " *"} />
-          <.input field={@form[:shop]} type="text" label={gettext("Shop")} />
+          <.input
+            field={@form[:shop]}
+            type="text"
+            label={gettext("Shop")}
+            list="shop-suggestions"
+          />
+          <datalist id="shop-suggestions">
+            <option :for={shop <- @shop_options} value={shop} />
+          </datalist>
           <.input
             field={@form[:status]}
             type="select"
