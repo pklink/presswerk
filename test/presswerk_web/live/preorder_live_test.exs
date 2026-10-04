@@ -66,6 +66,32 @@ defmodule PresswerkWeb.PreorderLiveTest do
   end
 
   describe "Neu" do
+    test "schlägt vorhandene Artists und Shops vor und erlaubt neue Werte", %{conn: conn} do
+      preorder_fixture(%{artist: "Boygenius", shop: "Bandcamp"})
+      preorder_fixture(%{artist: "Boygenius", shop: "Bandcamp"})
+      preorder_fixture(%{artist: "", shop: ""})
+
+      {:ok, view, _} = live(conn, ~p"/preorders/new")
+
+      assert has_element?(view, ~s(#preorder_artist[list="artist-suggestions"]))
+      assert has_element?(view, ~s(#preorder_shop[list="shop-suggestions"]))
+      assert has_element?(view, ~s(#artist-suggestions option[value="Boygenius"]))
+      assert has_element?(view, ~s(#shop-suggestions option[value="Bandcamp"]))
+      refute has_element?(view, ~s(#artist-suggestions option[value=""]))
+      refute has_element?(view, "#artist-suggestions option:nth-child(2)")
+      refute has_element?(view, "#shop-suggestions option:nth-child(2)")
+
+      {:ok, _, _} =
+        view
+        |> form("#preorder-form",
+          preorder: %{artist: "New Artist", album: "New Album", shop: "New Shop"}
+        )
+        |> render_submit()
+        |> follow_redirect(conn)
+
+      assert [%{shop: "New Shop"}] = Preorders.list_preorders(search: "New Artist")
+    end
+
     test "legt Vorbestellung an", %{conn: conn} do
       {:ok, view, _} = live(conn, ~p"/preorders/new")
 
@@ -146,6 +172,14 @@ defmodule PresswerkWeb.PreorderLiveTest do
   end
 
   describe "Show / Edit / Delete" do
+    test "zeigt Vorschläge auch beim Bearbeiten", %{conn: conn} do
+      p = preorder_fixture(%{artist: "Boygenius", shop: "Bandcamp"})
+      {:ok, view, _} = live(conn, ~p"/preorders/#{p}/edit")
+
+      assert has_element?(view, ~s(#artist-suggestions option[value="Boygenius"]))
+      assert has_element?(view, ~s(#shop-suggestions option[value="Bandcamp"]))
+    end
+
     test "zeigt Details", %{conn: conn} do
       p = preorder_fixture(%{shop: "Bandcamp", notes: "Klarer Vinyl"})
       {:ok, _view, html} = live(conn, ~p"/preorders/#{p}")
