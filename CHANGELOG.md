@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.3.0](https://github.com/pklink/presswerk/releases/tag/v0.3.0) - 2026-10-04
+
+- Added artist and shop suggestions to the preorder form, built from existing records and rendered with native `datalist` inputs.
+- Added a GitHub repository link to the footer, above the version.
+- Updated the Docker image to Elixir 1.20.4 on OTP 29.1.1, matching the CI toolchain.
+- Ran `mix precommit` on pull requests and published Docker images only after the checks pass.
+- Fixed flaky test runs by serializing the SQLite-backed test cases.
+- Updated dependencies: gettext 1.0.2, dns_cluster 0.3.1, daisyui 5.7.47, and phoenix_live_dashboard 0.9.1.
+- Added Renovate for automated dependency updates.
+
 ## [0.2.1](https://github.com/pklink/presswerk/releases/tag/v0.2.1) - 2026-10-04
 
 - Made preorder artists optional. Blank artists are stored as NULL, and the database migration preserves artist-and-album uniqueness for artistless records.
