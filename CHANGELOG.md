@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.1](https://github.com/pklink/presswerk/releases/tag/v0.3.1) - 2026-10-10
+
+- Fixed favicon delivery in production builds by moving it under `/images/` and updating the icon link.
+- Compacted the footer layout and aligned the language selector, retaining accessible labels and the no-JavaScript submit button.
+
 ## [0.3.0](https://github.com/pklink/presswerk/releases/tag/v0.3.0) - 2026-10-04
 
 - Added artist and shop suggestions to the preorder form, built from existing records and rendered with native `datalist` inputs.
