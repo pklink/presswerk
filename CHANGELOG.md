@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.3.2](https://github.com/pklink/presswerk/releases/tag/v0.3.2) - 2026-10-10
+
+- Added a 180×180 PNG Apple touch icon and linked it in the root layout for iPhone home screen bookmarks.
+
 ## [0.3.1](https://github.com/pklink/presswerk/releases/tag/v0.3.1) - 2026-10-10
 
 - Fixed favicon delivery in production builds by moving it under `/images/` and updating the icon link.
