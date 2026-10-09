@@ -47,6 +47,7 @@ defmodule PresswerkWeb.Layouts do
             </span>
           </.link>
 
+          <div class="ml-auto sm:hidden"><.theme_toggle /></div>
           <nav
             class="order-3 grid w-full grid-cols-3 gap-1 text-sm sm:order-none sm:ml-auto sm:flex sm:w-auto sm:items-center"
             aria-label={gettext("Main navigation")}
@@ -63,9 +64,8 @@ defmodule PresswerkWeb.Layouts do
                 "New preorder"
               )}</span>
             </.nav_link>
+            <div class="hidden sm:block sm:ml-2"><.theme_toggle /></div>
           </nav>
-
-          <div class="order-2 ml-auto sm:order-none sm:ml-2"><.theme_toggle /></div>
         </div>
       </header>
 
