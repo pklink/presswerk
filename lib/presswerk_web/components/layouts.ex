@@ -47,7 +47,6 @@ defmodule PresswerkWeb.Layouts do
             </span>
           </.link>
 
-          <div class="ml-auto sm:hidden"><.theme_toggle /></div>
           <nav
             class="order-3 grid w-full grid-cols-3 gap-1 text-sm sm:order-none sm:ml-auto sm:flex sm:w-auto sm:items-center"
             aria-label={gettext("Main navigation")}
@@ -64,8 +63,9 @@ defmodule PresswerkWeb.Layouts do
                 "New preorder"
               )}</span>
             </.nav_link>
-            <div class="hidden sm:block sm:ml-2"><.theme_toggle /></div>
           </nav>
+
+          <div class="order-2 ml-auto sm:order-none sm:ml-2"><.theme_toggle /></div>
         </div>
       </header>
 
@@ -76,34 +76,30 @@ defmodule PresswerkWeb.Layouts do
       </main>
 
       <footer id="app-footer" class="border-t border-base-300 px-4 py-4 sm:px-6">
-        <div class="mx-auto max-w-5xl flex flex-wrap items-start justify-between gap-2">
-          <div class="space-y-1 text-xs text-base-content/60">
-            <p>
-              Presswerk
-              <a
-                href="https://github.com/pklink/presswerk"
-                class="font-medium text-base-content underline decoration-base-content/30 underline-offset-4 hover:text-primary"
-              >{gettext("on GitHub")}</a>
-            </p>
-            <p>v{to_string(Application.spec(:presswerk, :vsn))}</p>
-          </div>
-          <.form
-            for={%{}}
-            action={~p"/locale"}
-            id="locale-form"
-            class="ml-auto flex flex-wrap items-end gap-2"
-          >
+        <div class="mx-auto max-w-5xl flex items-center justify-between gap-4">
+          <p class="text-xs text-base-content/60">
+            <a
+              href="https://github.com/pklink/presswerk"
+              aria-label={gettext("Presswerk on GitHub")}
+              class="font-medium text-base-content underline decoration-base-content/30 underline-offset-4 hover:text-primary"
+            >Presswerk</a>
+            v{to_string(Application.spec(:presswerk, :vsn))}
+          </p>
+          <.form for={%{}} action={~p"/locale"} id="locale-form" class="flex items-center gap-2">
             <input type="hidden" name="return_to" value={@current_path} />
-            <.input
-              type="select"
+            <select
               id="locale-select"
               name="locale"
-              label={gettext("Language")}
-              value={@locale}
-              options={[{"English", "en"}, {"Deutsch", "de"}]}
-            />
+              class="select sm:select-sm"
+              aria-label={gettext("Language")}
+            >
+              {Phoenix.HTML.Form.options_for_select(
+                [{"English", "en"}, {"Deutsch", "de"}],
+                @locale
+              )}
+            </select>
             <noscript>
-              <button type="submit" class="btn btn-sm mb-2">{gettext("Save")}</button>
+              <button type="submit" class="btn btn-sm">{gettext("Save")}</button>
             </noscript>
           </.form>
         </div>
