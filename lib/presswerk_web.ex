@@ -17,8 +17,10 @@ defmodule PresswerkWeb do
   those modules here.
   """
 
+  @doc "List of static paths served by the endpoint."
   def static_paths, do: ~w(assets fonts images robots.txt)
 
+  @doc "Defines the router macro for Phoenix routers."
   def router do
     quote do
       use Phoenix.Router, helpers: false
@@ -30,12 +32,14 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc "Defines the channel macro for Phoenix channels."
   def channel do
     quote do
       use Phoenix.Channel
     end
   end
 
+  @doc "Defines the controller macro for Phoenix controllers."
   def controller do
     quote do
       use Phoenix.Controller, formats: [:html, :json]
@@ -46,6 +50,7 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc "Defines the live_view macro for Phoenix LiveViews."
   def live_view do
     quote do
       use Phoenix.LiveView
@@ -54,6 +59,7 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc "Defines the live_component macro for Phoenix LiveComponents."
   def live_component do
     quote do
       use Phoenix.LiveComponent
@@ -62,6 +68,7 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc "Defines the html macro for Phoenix components."
   def html do
     quote do
       use Phoenix.Component
@@ -75,6 +82,7 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc false
   defp html_helpers do
     quote do
       use Gettext, backend: PresswerkWeb.Gettext
@@ -92,6 +100,7 @@ defmodule PresswerkWeb do
     end
   end
 
+  @doc "Defines verified routes for compile-time route checking."
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,

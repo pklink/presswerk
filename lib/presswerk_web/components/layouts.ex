@@ -114,6 +114,7 @@ defmodule PresswerkWeb.Layouts do
   attr :active, :boolean, default: false
   slot :inner_block, required: true
 
+  @doc false
   defp nav_link(assigns) do
     ~H"""
     <.link

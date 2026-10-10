@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.PreorderLive.Show do
+  @moduledoc "Shows a single preorder with all details."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents

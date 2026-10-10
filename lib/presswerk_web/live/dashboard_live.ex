@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.DashboardLive do
+  @moduledoc "Dashboard with statistics and upcoming releases."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents
@@ -73,6 +74,7 @@ defmodule PresswerkWeb.DashboardLive do
   attr :id, :string, required: true
   attr :accent, :boolean, default: false
 
+  @doc false
   defp stat(assigns) do
     ~H"""
     <div

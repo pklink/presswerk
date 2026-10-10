@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.PreorderLive.Index do
+  @moduledoc "Lists all preorders with search, filter and sort."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents
@@ -10,7 +11,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
     {:ok, assign(socket, :page_title, gettext("Preorders"))}
   end
 
-  # Suche, Filter und Sortierung liegen in der URL (teilbar, Zurück-Button geht).
+  # Search, filter and sorting live in the URL (shareable, back button works).
   @impl true
   def handle_params(params, _uri, socket) do
     search = params["q"] || ""
@@ -23,6 +24,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
      |> assign(:preorders, Preorders.list_preorders(search: search, status: status, sort: sort))}
   end
 
+  @doc false
   defp valid_status(status) do
     if status in Enum.map(Presswerk.Preorders.Preorder.statuses(), &Atom.to_string/1),
       do: status,
@@ -35,6 +37,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
      push_patch(socket, to: ~p"/preorders?#{query_params(q, status, sort)}", replace: true)}
   end
 
+  @doc false
   defp query_params(q, status, sort) do
     [q: q, status: status, sort: sort]
     |> Enum.reject(fn {k, v} -> v in ["", nil] or (k == :sort and v == "release_date") end)

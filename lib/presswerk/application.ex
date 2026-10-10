@@ -34,6 +34,7 @@ defmodule Presswerk.Application do
     :ok
   end
 
+  @doc false
   defp skip_migrations?() do
     # By default, sqlite migrations are run when using a release
     System.get_env("RELEASE_NAME") == nil

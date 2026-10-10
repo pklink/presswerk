@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.PreorderLive.Form do
+  @moduledoc "Form for creating and editing preorders."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents
@@ -17,6 +18,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
      |> apply_action(socket.assigns.live_action, params)}
   end
 
+  @doc false
   defp suggestions(preorders, field) do
     preorders
     |> Enum.map(&Map.get(&1, field))
@@ -25,6 +27,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     |> Enum.sort()
   end
 
+  @doc false
   defp apply_action(socket, :new, _params) do
     preorder = %Preorder{ordered_at: Date.utc_today()}
 
@@ -33,6 +36,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     |> assign(:form, to_form(Preorders.change_preorder(preorder)))
   end
 
+  @doc false
   defp apply_action(socket, :edit, %{"id" => id}) do
     preorder = Preorders.get_preorder!(id)
 
@@ -51,6 +55,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     save(socket, socket.assigns.live_action, params)
   end
 
+  @doc false
   defp save(socket, :new, params) do
     case Preorders.create_preorder(params) do
       {:ok, preorder} ->
@@ -64,6 +69,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     end
   end
 
+  @doc false
   defp save(socket, :edit, params) do
     case Preorders.update_preorder(socket.assigns.preorder, params) do
       {:ok, preorder} ->

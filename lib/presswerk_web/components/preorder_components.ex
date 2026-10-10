@@ -1,19 +1,22 @@
 defmodule PresswerkWeb.PreorderComponents do
   @moduledoc """
-  Kleine Hilfen zur Darstellung von Vorbestellungen.
+  Helper components for displaying preorders.
   """
   use Phoenix.Component
   use Gettext, backend: PresswerkWeb.Gettext
 
+  @doc "Returns the localized label for a preorder status."
   def status_label(:preordered), do: gettext("Preordered")
   def status_label(:shipped), do: gettext("Shipped")
   def status_label(:received), do: gettext("Received")
   def status_label(:cancelled), do: gettext("Cancelled")
 
+  @doc "Returns status options as `{label, value}` pairs for select inputs."
   def status_options do
     for s <- Presswerk.Preorders.Preorder.statuses(), do: {status_label(s), s}
   end
 
+  @doc ~S|Formats a date for display, or returns "–" for nil.|
   def format_date(nil), do: "–"
 
   def format_date(%Date{} = date) do
@@ -21,6 +24,7 @@ defmodule PresswerkWeb.PreorderComponents do
     Calendar.strftime(date, format)
   end
 
+  @doc ~S|Formats a price for display, or returns "–" for nil.|
   def format_price(nil), do: "–"
 
   def format_price(%Decimal{} = price) do
@@ -30,12 +34,14 @@ defmodule PresswerkWeb.PreorderComponents do
   def format_price(price) when is_number(price),
     do: price |> Decimal.from_float() |> format_price()
 
+  @doc false
   defp localize_decimal(str) do
     if Gettext.get_locale(PresswerkWeb.Gettext) == "de",
       do: String.replace(str, ".", ","),
       else: str
   end
 
+  @doc "Formats a date as a localized month and year (e.g. \"October 2026\")."
   def format_month(%Date{} = date) do
     months = [
       gettext("January"),
@@ -57,6 +63,9 @@ defmodule PresswerkWeb.PreorderComponents do
 
   attr :status, :atom, required: true
 
+  @doc """
+  Renders a status badge with color coding based on the preorder status.
+  """
   def status_badge(assigns) do
     ~H"""
     <span class={[

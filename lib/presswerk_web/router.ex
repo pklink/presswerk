@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.Router do
+  @moduledoc "HTTP router for the Presswerk web application."
   use PresswerkWeb, :router
 
   pipeline :browser do
