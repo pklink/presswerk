@@ -130,7 +130,6 @@ defmodule Presswerk.ConfigTest do
   defp restore_env(nil), do: Application.delete_env(:presswerk, :default_locale)
   defp restore_env(value), do: Application.put_env(:presswerk, :default_locale, value)
 
-  @doc false
   defp restore_currency(nil), do: Application.delete_env(:presswerk, :currency)
   defp restore_currency(value), do: Application.put_env(:presswerk, :currency, value)
 
