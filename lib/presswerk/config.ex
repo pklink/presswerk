@@ -43,8 +43,12 @@ defmodule Presswerk.Config do
       Application.put_env(:presswerk, :default_locale, locale)
     end
 
-    if currency = config["currency"] do
-      Application.put_env(:presswerk, :currency, currency)
+    case config["currency"] do
+      currency when is_binary(currency) and currency != "" ->
+        Application.put_env(:presswerk, :currency, currency)
+
+      _ ->
+        :ok
     end
   end
 

@@ -40,6 +40,24 @@ defmodule Presswerk.ConfigTest do
       end
     end
 
+    test "ignores invalid currency values" do
+      path = tmp_path()
+      File.write!(path, ~s({"currency": ""}))
+      original_currency = Application.get_env(:presswerk, :currency)
+      original_config = System.get_env("PRESSWERK_CONFIG")
+
+      try do
+        System.put_env("PRESSWERK_CONFIG", path)
+        Application.delete_env(:presswerk, :currency)
+        assert :ok = Config.load()
+        assert Application.get_env(:presswerk, :currency) == nil
+      after
+        restore_currency(original_currency)
+        restore_presswerk_config(original_config)
+        File.rm!(path)
+      end
+    end
+
     test "missing file logs warning and leaves env unchanged" do
       original_locale = Application.get_env(:presswerk, :default_locale)
       original_config = System.get_env("PRESSWERK_CONFIG")
@@ -112,6 +130,7 @@ defmodule Presswerk.ConfigTest do
   defp restore_env(nil), do: Application.delete_env(:presswerk, :default_locale)
   defp restore_env(value), do: Application.put_env(:presswerk, :default_locale, value)
 
+  @doc false
   defp restore_currency(nil), do: Application.delete_env(:presswerk, :currency)
   defp restore_currency(value), do: Application.put_env(:presswerk, :currency, value)
 

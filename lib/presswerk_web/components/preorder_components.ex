@@ -44,6 +44,7 @@ defmodule PresswerkWeb.PreorderComponents do
       else: str
   end
 
+  @doc false
   defp currency do
     Application.get_env(:presswerk, :currency, "EUR")
   end
