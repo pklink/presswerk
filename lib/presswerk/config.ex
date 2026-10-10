@@ -39,4 +39,8 @@ defmodule Presswerk.Config do
       Application.put_env(:presswerk, :default_locale, locale)
     end
   end
+
+  defp apply(other) do
+    Logger.warning("Unexpected config file content, expected a JSON object: #{inspect(other)}")
+  end
 end
