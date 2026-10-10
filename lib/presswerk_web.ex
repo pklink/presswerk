@@ -82,7 +82,6 @@ defmodule PresswerkWeb do
     end
   end
 
-  @doc false
   defp html_helpers do
     quote do
       use Gettext, backend: PresswerkWeb.Gettext

@@ -76,7 +76,6 @@ defmodule PresswerkWeb.DashboardLive do
   attr :id, :string, required: true
   attr :accent, :boolean, default: false
 
-  @doc false
   defp stat(assigns) do
     ~H"""
     <div

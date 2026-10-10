@@ -303,7 +303,6 @@ defmodule PresswerkWeb.CoreComponents do
   end
 
   # Helper used by inputs to generate form errors
-  @doc false
   defp error(assigns) do
     ~H"""
     <p class="mt-1.5 flex gap-2 items-center text-sm text-error">

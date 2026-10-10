@@ -34,7 +34,6 @@ defmodule PresswerkWeb.PreorderComponents do
   def format_price(price) when is_number(price),
     do: price |> Decimal.from_float() |> format_price()
 
-  @doc false
   defp localize_decimal(str) do
     if Gettext.get_locale(PresswerkWeb.Gettext) == "de",
       do: String.replace(str, ".", ","),

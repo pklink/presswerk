@@ -91,7 +91,6 @@ defmodule PresswerkWeb.Telemetry do
     ]
   end
 
-  @doc false
   defp periodic_measurements do
     [
       # A module, function and arguments to be invoked periodically.

@@ -26,7 +26,6 @@ defmodule PresswerkWeb.PreorderLive.Index do
      |> assign(:preorders, Preorders.list_preorders(search: search, status: status, sort: sort))}
   end
 
-  @doc false
   defp valid_status(status) do
     if status in Enum.map(Presswerk.Preorders.Preorder.statuses(), &Atom.to_string/1),
       do: status,
@@ -40,7 +39,6 @@ defmodule PresswerkWeb.PreorderLive.Index do
      push_patch(socket, to: ~p"/preorders?#{query_params(q, status, sort)}", replace: true)}
   end
 
-  @doc false
   defp query_params(q, status, sort) do
     [q: q, status: status, sort: sort]
     |> Enum.reject(fn {k, v} -> v in ["", nil] or (k == :sort and v == "release_date") end)

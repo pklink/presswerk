@@ -27,7 +27,7 @@ defmodule Presswerk.Preorders.Preorder do
   @doc "Statuses that count as \"open\"."
   def open_statuses, do: [:preordered, :shipped]
 
-  @doc false
+  @doc "Builds a changeset for a preorder with validations and constraints."
   def changeset(preorder, attrs) do
     preorder
     |> cast(attrs, [
@@ -54,7 +54,6 @@ defmodule Presswerk.Preorders.Preorder do
     )
   end
 
-  @doc false
   defp trim_artist(value) when is_binary(value) do
     case String.trim(value) do
       "" -> nil
@@ -64,11 +63,9 @@ defmodule Presswerk.Preorders.Preorder do
 
   defp trim_artist(value), do: value
 
-  @doc false
   defp trim(value) when is_binary(value), do: String.trim(value)
   defp trim(value), do: value
 
-  @doc false
   defp validate_price_scale(%Decimal{exp: exp}) do
     scale = -exp
 
@@ -79,6 +76,5 @@ defmodule Presswerk.Preorders.Preorder do
     end
   end
 
-  @doc false
   defp validate_price_scale(_value), do: []
 end

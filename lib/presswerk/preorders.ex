@@ -25,7 +25,6 @@ defmodule Presswerk.Preorders do
     |> Repo.all()
   end
 
-  @doc false
   defp filter_search(query, term) when is_binary(term) do
     case String.trim(term) do
       "" ->
@@ -44,22 +43,18 @@ defmodule Presswerk.Preorders do
 
   defp filter_search(query, _), do: query
 
-  @doc false
   defp escape_like(term), do: String.replace(term, ~r/([\\%_])/, "\\\\\\1")
 
-  @doc false
   defp filter_status(query, status) when status in ["", "all", nil], do: query
 
   defp filter_status(query, status) do
     where(query, [p], p.status == ^to_status(status))
   end
 
-  @doc false
   defp to_status(status) when is_atom(status), do: status
   defp to_status(status) when is_binary(status), do: String.to_existing_atom(status)
 
   # Entries without a release date are sorted last.
-  @doc false
   defp sort(query, :artist) do
     order_by(query, [p], asc: fragment("lower(?)", p.artist), asc: fragment("lower(?)", p.album))
   end
