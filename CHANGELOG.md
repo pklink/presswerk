@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/pklink/presswerk/releases/tag/v0.4.0) - 2026-10-11
+
+- Added optional decimal prices to preorders, including a database migration, non-negative two-decimal-place validation, form input, and localized detail-page formatting.
+- Added an optional startup JSON configuration file with a configurable default UI language (`en` or `de`, default `en`). The file path can be overridden with `PRESSWERK_CONFIG` and defaults to `/config/presswerk.json` in Docker.
+- Added a configurable display currency for all prices, defaulting to EUR, without currency conversion.
+- Documented configuration file setup and Docker mounts, and expanded module and function documentation.
+
 ## [0.3.2](https://github.com/pklink/presswerk/releases/tag/v0.3.2) - 2026-10-10
 
 - Added a 180×180 PNG Apple touch icon and linked it in the root layout for iPhone home screen bookmarks.
