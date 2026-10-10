@@ -10,6 +10,7 @@ defmodule PresswerkWeb.Telemetry do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
 
+  @doc "Initializes the telemetry supervisor with the poller child."
   @impl true
   def init(_arg) do
     children = [
@@ -23,7 +24,9 @@ defmodule PresswerkWeb.Telemetry do
     Supervisor.init(children, strategy: :one_for_one)
   end
 
-  @doc "Returns the list of telemetry metrics for Phoenix and the VM."
+  @doc """
+  Returns telemetry metrics for Phoenix endpoints, database queries, and VM statistics.
+  """
   def metrics do
     [
       # Phoenix Metrics

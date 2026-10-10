@@ -5,7 +5,7 @@ defmodule PresswerkWeb.Locale do
   import Plug.Conn, only: [get_session: 2]
   import Phoenix.Component, only: [assign: 3]
 
-  @doc false
+  @doc "Plug callback: returns the given options unchanged."
   def init(opts), do: opts
 
   @doc """

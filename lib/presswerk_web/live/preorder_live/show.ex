@@ -6,6 +6,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
 
   alias Presswerk.Preorders
 
+  @doc "Mounts the show page and loads the preorder by ID."
   @impl true
   def mount(%{"id" => id}, _session, socket) do
     preorder = Preorders.get_preorder!(id)
@@ -18,6 +19,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
     {:ok, assign(socket, page_title: title, preorder: preorder)}
   end
 
+  @doc "Handles the delete event and navigates back to the index."
   @impl true
   def handle_event("delete", _params, socket) do
     {:ok, _} = Preorders.delete_preorder(socket.assigns.preorder)
@@ -28,6 +30,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
      |> push_navigate(to: ~p"/preorders")}
   end
 
+  @doc "Renders the preorder detail page."
   @impl true
   def render(assigns) do
     ~H"""

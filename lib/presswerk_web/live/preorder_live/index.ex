@@ -6,12 +6,14 @@ defmodule PresswerkWeb.PreorderLive.Index do
 
   alias Presswerk.Preorders
 
+  @doc "Mounts the index page and sets the page title."
   @impl true
   def mount(_params, _session, socket) do
     {:ok, assign(socket, :page_title, gettext("Preorders"))}
   end
 
   # Search, filter and sorting live in the URL (shareable, back button works).
+  @doc "Handles URL params for search, status filter and sorting."
   @impl true
   def handle_params(params, _uri, socket) do
     search = params["q"] || ""
@@ -31,6 +33,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
       else: ""
   end
 
+  @doc "Handles the filter event and patches the URL with query params."
   @impl true
   def handle_event("filter", %{"q" => q, "status" => status, "sort" => sort}, socket) do
     {:noreply,
@@ -43,6 +46,7 @@ defmodule PresswerkWeb.PreorderLive.Index do
     |> Enum.reject(fn {k, v} -> v in ["", nil] or (k == :sort and v == "release_date") end)
   end
 
+  @doc "Renders the preorder list with search, filter and sort controls."
   @impl true
   def render(assigns) do
     ~H"""

@@ -7,6 +7,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
   alias Presswerk.Preorders
   alias Presswerk.Preorders.Preorder
 
+  @doc "Mounts the form and prepares suggestions and the changeset."
   @impl true
   def mount(params, _session, socket) do
     preorders = Preorders.list_preorders()
@@ -45,6 +46,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     |> assign(:form, to_form(Preorders.change_preorder(preorder)))
   end
 
+  @doc "Handles form events: validates input on change and saves on submit."
   @impl true
   def handle_event("validate", %{"preorder" => params}, socket) do
     changeset = Preorders.change_preorder(socket.assigns.preorder, params)
@@ -83,6 +85,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
     end
   end
 
+  @doc "Renders the preorder form."
   @impl true
   def render(assigns) do
     ~H"""
