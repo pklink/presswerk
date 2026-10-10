@@ -1,6 +1,6 @@
 # Presswerk
 
-Personal web app for tracking vinyl preorders (single user, no login). UI supports English (default) and German via Gettext; code and identifiers are English.
+Personal web app for tracking vinyl preorders (single user, no login). UI supports English (default) and German via Gettext; everything written to files is English, except localizations.
 
 ## Project-specific
 
