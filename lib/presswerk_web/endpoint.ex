@@ -1,4 +1,5 @@
 defmodule PresswerkWeb.Endpoint do
+  @moduledoc "Phoenix endpoint for the Presswerk web application."
   use Phoenix.Endpoint, otp_app: :presswerk
 
   # The session will be stored in the cookie and signed,

@@ -1,6 +1,6 @@
 defmodule Presswerk.Preorders do
   @moduledoc """
-  Verwaltung von Vinyl-Vorbestellungen.
+  Manages vinyl preorders.
   """
 
   import Ecto.Query, warn: false
@@ -9,13 +9,13 @@ defmodule Presswerk.Preorders do
   alias Presswerk.Preorders.Preorder
 
   @doc """
-  Listet Vorbestellungen.
+  Lists preorders.
 
-  Optionen:
+  Options:
 
-    * `:search` - Teilstring in Artist oder Album
-    * `:status` - Status als Atom oder String (leer/`"all"` = alle)
-    * `:sort` - `:release_date` (Standard) oder `:artist`
+    * `:search` - Substring in artist or album
+    * `:status` - Status as atom or string (empty/`"all"` = all)
+    * `:sort` - `:release_date` (default) or `:artist`
   """
   def list_preorders(opts \\ []) do
     Preorder
@@ -54,7 +54,7 @@ defmodule Presswerk.Preorders do
   defp to_status(status) when is_atom(status), do: status
   defp to_status(status) when is_binary(status), do: String.to_existing_atom(status)
 
-  # Einträge ohne Release-Datum stehen am Ende.
+  # Entries without a release date are sorted last.
   defp sort(query, :artist) do
     order_by(query, [p], asc: fragment("lower(?)", p.artist), asc: fragment("lower(?)", p.album))
   end
@@ -67,28 +67,33 @@ defmodule Presswerk.Preorders do
     )
   end
 
+  @doc "Gets a single preorder by ID. Raises if not found."
   def get_preorder!(id), do: Repo.get!(Preorder, id)
 
+  @doc "Creates a preorder from the given attributes."
   def create_preorder(attrs) do
     %Preorder{}
     |> Preorder.changeset(attrs)
     |> Repo.insert()
   end
 
+  @doc "Updates a preorder with the given attributes."
   def update_preorder(%Preorder{} = preorder, attrs) do
     preorder
     |> Preorder.changeset(attrs)
     |> Repo.update()
   end
 
+  @doc "Deletes a preorder."
   def delete_preorder(%Preorder{} = preorder), do: Repo.delete(preorder)
 
+  @doc "Returns a changeset for the given preorder and attributes."
   def change_preorder(%Preorder{} = preorder, attrs \\ %{}) do
     Preorder.changeset(preorder, attrs)
   end
 
   @doc """
-  Kennzahlen fürs Dashboard: `%{open: n, received: n, cancelled: n}`.
+  Dashboard statistics: `%{open: n, received: n, cancelled: n}`.
   """
   def stats do
     counts =
@@ -106,9 +111,9 @@ defmodule Presswerk.Preorders do
   end
 
   @doc """
-  Offene Vorbestellungen mit Release-Datum, gruppiert nach Monat.
+  Open preorders with a release date, grouped by month.
 
-  Liefert `[{%Date{day: 1}, [preorder, ...]}, ...]` aufsteigend sortiert.
+  Returns `[{%Date{day: 1}, [preorder, ...]}, ...]` sorted ascending.
   """
   def upcoming_by_month do
     Preorder

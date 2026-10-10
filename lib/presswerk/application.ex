@@ -5,6 +5,7 @@ defmodule Presswerk.Application do
 
   use Application
 
+  @doc "Starts the application supervisor with all child processes."
   @impl true
   def start(_type, _args) do
     children = [
@@ -28,6 +29,7 @@ defmodule Presswerk.Application do
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
+  @doc "Handles application configuration changes at runtime."
   @impl true
   def config_change(changed, _new, removed) do
     PresswerkWeb.Endpoint.config_change(changed, removed)

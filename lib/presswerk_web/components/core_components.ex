@@ -454,6 +454,14 @@ defmodule PresswerkWeb.CoreComponents do
 
   ## JS Commands
 
+  @doc """
+  Shows an element with a transition.
+
+  ## Examples
+
+      show("#my-element")
+      show(js, "#my-element")
+  """
   def show(js \\ %JS{}, selector) do
     JS.show(js,
       to: selector,
@@ -465,6 +473,14 @@ defmodule PresswerkWeb.CoreComponents do
     )
   end
 
+  @doc """
+  Hides an element with a transition.
+
+  ## Examples
+
+      hide("#my-element")
+      hide(js, "#my-element")
+  """
   def hide(js \\ %JS{}, selector) do
     JS.hide(js,
       to: selector,

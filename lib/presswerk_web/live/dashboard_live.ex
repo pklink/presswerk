@@ -1,10 +1,12 @@
 defmodule PresswerkWeb.DashboardLive do
+  @moduledoc "Dashboard with statistics and upcoming releases."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents
 
   alias Presswerk.Preorders
 
+  @doc "Mounts the dashboard and loads statistics and upcoming releases."
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
@@ -14,6 +16,7 @@ defmodule PresswerkWeb.DashboardLive do
      |> assign(:months, Preorders.upcoming_by_month())}
   end
 
+  @doc "Renders the dashboard with stats and upcoming releases."
   @impl true
   def render(assigns) do
     ~H"""

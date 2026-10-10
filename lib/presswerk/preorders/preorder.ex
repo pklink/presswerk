@@ -1,4 +1,5 @@
 defmodule Presswerk.Preorders.Preorder do
+  @moduledoc "Schema and changeset for vinyl preorders."
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -20,12 +21,13 @@ defmodule Presswerk.Preorders.Preorder do
     timestamps(type: :utc_datetime)
   end
 
+  @doc "Returns the list of all available statuses."
   def statuses, do: @statuses
 
-  @doc "Stati, die als \"offen\" gelten."
+  @doc "Statuses that count as \"open\"."
   def open_statuses, do: [:preordered, :shipped]
 
-  @doc false
+  @doc "Builds a changeset for a preorder with validations and constraints."
   def changeset(preorder, attrs) do
     preorder
     |> cast(attrs, [
@@ -64,7 +66,6 @@ defmodule Presswerk.Preorders.Preorder do
   defp trim(value) when is_binary(value), do: String.trim(value)
   defp trim(value), do: value
 
-  @doc false
   defp validate_price_scale(%Decimal{exp: exp}) do
     scale = -exp
 
@@ -75,6 +76,5 @@ defmodule Presswerk.Preorders.Preorder do
     end
   end
 
-  @doc false
   defp validate_price_scale(_value), do: []
 end

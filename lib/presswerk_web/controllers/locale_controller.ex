@@ -1,6 +1,10 @@
 defmodule PresswerkWeb.LocaleController do
+  @moduledoc "Controller for switching the application locale."
   use PresswerkWeb, :controller
 
+  @doc """
+  Updates the locale in the session and redirects back to the given path.
+  """
   def update(conn, params) do
     path = params["return_to"] || "/"
     uri = URI.parse(path)
