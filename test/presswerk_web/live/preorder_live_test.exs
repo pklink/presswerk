@@ -151,6 +151,26 @@ defmodule PresswerkWeb.PreorderLiveTest do
       assert [%{article_url: ^article_url, order_url: ^order_url}] = Preorders.list_preorders()
     end
 
+    test "speichert und zeigt Preis", %{conn: conn} do
+      {:ok, view, _} = live(conn, ~p"/preorders/new")
+
+      {:ok, _show, html} =
+        view
+        |> form("#preorder-form",
+          preorder: %{
+            artist: "Artist",
+            album: "Album",
+            price: "24.99"
+          }
+        )
+        |> render_submit()
+        |> follow_redirect(conn)
+
+      assert html =~ "24.99"
+      assert [%{price: %Decimal{}} = p] = Preorders.list_preorders()
+      assert p.price == Decimal.from_float(24.99)
+    end
+
     test "validiert Pflichtfelder", %{conn: conn} do
       {:ok, view, _} = live(conn, ~p"/preorders/new")
 

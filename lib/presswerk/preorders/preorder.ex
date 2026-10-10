@@ -45,7 +45,7 @@ defmodule Presswerk.Preorders.Preorder do
     |> update_change(:album, &trim/1)
     |> validate_required([:album, :status])
     |> validate_number(:price, greater_than_or_equal_to: 0)
-    |> validate_change(:price, &validate_price_scale/1)
+    |> validate_change(:price, fn _field, value -> validate_price_scale(value) end)
     |> unique_constraint([:artist, :album],
       name: :preorders_artist_album_index,
       message: "This record has already been added."
@@ -68,11 +68,11 @@ defmodule Presswerk.Preorders.Preorder do
     scale = -exp
 
     if scale <= 2 do
-      [:ok]
+      []
     else
       [price: "Price must have at most 2 decimal places"]
     end
   end
 
-  defp validate_price_scale(_), do: [:ok]
+  defp validate_price_scale(_value), do: []
 end

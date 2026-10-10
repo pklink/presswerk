@@ -31,6 +31,12 @@ defmodule Presswerk.PreordersTest do
       assert p.status == :shipped
     end
 
+    test "speichert Preis als Decimal" do
+      attrs = Map.put(@valid, :price, Decimal.from_float(24.99))
+      assert {:ok, p} = Preorders.create_preorder(attrs)
+      assert p.price == Decimal.from_float(24.99)
+    end
+
     test "Album ist Pflicht" do
       assert {:error, cs} = Preorders.create_preorder(%{})
       assert %{album: ["can't be blank"]} = errors_on(cs)
@@ -59,6 +65,18 @@ defmodule Presswerk.PreordersTest do
     test "ungültiger Status wird abgelehnt" do
       assert {:error, cs} = Preorders.create_preorder(Map.put(@valid, :status, "kaputt"))
       assert %{status: [_]} = errors_on(cs)
+    end
+
+    test "negativer Preis wird abgelehnt" do
+      attrs = Map.put(@valid, :price, Decimal.from_float(-10.00))
+      assert {:error, cs} = Preorders.create_preorder(attrs)
+      assert %{price: [_]} = errors_on(cs)
+    end
+
+    test "Preis mit mehr als 2 Dezimalstellen wird abgelehnt" do
+      attrs = Map.put(@valid, :price, Decimal.from_float(10.123))
+      assert {:error, cs} = Preorders.create_preorder(attrs)
+      assert %{price: ["Price must have at most 2 decimal places"]} = errors_on(cs)
     end
 
     test "Dublette wird mit freundlicher Meldung abgelehnt" do
