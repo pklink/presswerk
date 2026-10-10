@@ -15,6 +15,7 @@ defmodule Presswerk.Preorders.Preorder do
     field :article_url, :string
     field :order_url, :string
     field :notes, :string
+    field :price, :decimal
 
     timestamps(type: :utc_datetime)
   end
@@ -37,11 +38,14 @@ defmodule Presswerk.Preorders.Preorder do
       :cover_url,
       :article_url,
       :order_url,
-      :notes
+      :notes,
+      :price
     ])
     |> update_change(:artist, &trim_artist/1)
     |> update_change(:album, &trim/1)
     |> validate_required([:album, :status])
+    |> validate_number(:price, greater_than_or_equal_to: 0)
+    |> validate_change(:price, fn _field, value -> validate_price_scale(value) end)
     |> unique_constraint([:artist, :album],
       name: :preorders_artist_album_index,
       message: "This record has already been added."
@@ -59,4 +63,18 @@ defmodule Presswerk.Preorders.Preorder do
 
   defp trim(value) when is_binary(value), do: String.trim(value)
   defp trim(value), do: value
+
+  @doc false
+  defp validate_price_scale(%Decimal{exp: exp}) do
+    scale = -exp
+
+    if scale <= 2 do
+      []
+    else
+      [price: "Price must have at most 2 decimal places"]
+    end
+  end
+
+  @doc false
+  defp validate_price_scale(_value), do: []
 end
