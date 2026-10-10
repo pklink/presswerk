@@ -36,12 +36,14 @@ defmodule Presswerk.Config do
     :ok
   end
 
+  @doc false
   defp apply(config) when is_map(config) do
     if locale = config["default_locale"] do
       Application.put_env(:presswerk, :default_locale, locale)
     end
   end
 
+  @doc false
   defp apply(other) do
     Logger.warning("Unexpected config file content, expected a JSON object: #{inspect(other)}")
   end

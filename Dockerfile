@@ -25,12 +25,13 @@ FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends libstdc++6 libncurses6 libsqlite3-0 openssl ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
-    && mkdir /data && chown nobody:nogroup /data
+    && mkdir /data && chown nobody:nogroup /data \
+    && mkdir /config && chown nobody:nogroup /config
 
 WORKDIR /app
 COPY --from=builder --chown=nobody:nogroup /app/_build/prod/rel/presswerk ./
 
-ENV LANG=C.UTF-8 PHX_SERVER=true DATABASE_PATH=/data/presswerk.db
+ENV LANG=C.UTF-8 PHX_SERVER=true DATABASE_PATH=/data/presswerk.db PRESSWERK_CONFIG=/config/presswerk.json
 USER nobody
 EXPOSE 4000
 CMD ["/app/bin/presswerk", "start"]

@@ -46,6 +46,7 @@ defmodule PresswerkWeb.Locale do
   def normalize(locale) when locale in ~w(en de), do: locale
   def normalize(_locale), do: default_locale()
 
+  @doc false
   defp default_locale do
     case Application.get_env(:presswerk, :default_locale, "en") do
       locale when locale in ~w(en de) -> locale

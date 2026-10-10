@@ -51,7 +51,7 @@ cp config/presswerk.example.json config/presswerk.json
 |:----|:-------|:------------|
 | `default_locale` | `"en"`, `"de"` | Default UI language for new visitors. Users can still switch languages in the footer; their choice is stored in the browser session. |
 
-The file path defaults to `config/presswerk.json` and can be changed with the `PRESSWERK_CONFIG` environment variable. A missing file is not an error; defaults are used.
+The file path defaults to `config/presswerk.json` locally and `/config/presswerk.json` in Docker. It can be changed with the `PRESSWERK_CONFIG` environment variable. A missing file logs a warning; defaults are used.
 
 ## Run with Docker
 
@@ -65,16 +65,14 @@ SECRET_KEY_BASE=<generated secret>
 
 Start the app with `docker compose up -d --build` and open <http://localhost:4000>. The SQLite database is stored in the `presswerk-data` Docker volume; migrations run when the container starts. Keep the same secret across restarts and do not commit the `.env` file. When deploying behind an HTTPS reverse proxy, set `PHX_HOST` in `.env` to the public hostname.
 
-To change the default language, add a config file mount to your `docker-compose.yml`:
+To change the default language, add a config directory mount to your `docker-compose.yml`:
 
 ```yaml
 services:
   presswerk:
-    environment:
-      PRESSWERK_CONFIG: /data/presswerk.json
     volumes:
       - presswerk-data:/data
-      - ./presswerk.json:/data/presswerk.json:ro
+      - ./config:/config:ro
 ```
 
 **Note:** Presswerk has no login. The default Docker configuration publishes port 4000, so do not expose an instance with personal data to the internet without access protection.
@@ -89,6 +87,18 @@ docker run -d --name presswerk \
   -e SECRET_KEY_BASE=<generated secret> \
   -e PHX_HOST=localhost \
   -v presswerk-data:/data \
+  ghcr.io/pklink/presswerk:latest
+```
+
+To change the default language, mount the config directory:
+
+```sh
+docker run -d --name presswerk \
+  -p 4000:4000 \
+  -e SECRET_KEY_BASE=<generated secret> \
+  -e PHX_HOST=localhost \
+  -v presswerk-data:/data \
+  -v ./config:/config:ro \
   ghcr.io/pklink/presswerk:latest
 ```
 
