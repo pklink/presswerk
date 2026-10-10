@@ -64,6 +64,7 @@ defmodule Presswerk.Preorders.Preorder do
   defp trim(value) when is_binary(value), do: String.trim(value)
   defp trim(value), do: value
 
+  @doc false
   defp validate_price_scale(%Decimal{exp: exp}) do
     scale = -exp
 
@@ -74,5 +75,6 @@ defmodule Presswerk.Preorders.Preorder do
     end
   end
 
+  @doc false
   defp validate_price_scale(_value), do: []
 end
