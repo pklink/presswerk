@@ -24,11 +24,15 @@ defmodule PresswerkWeb.PreorderComponents do
     Calendar.strftime(date, format)
   end
 
+  @doc "Returns the price field label including the configured currency."
+  def price_label, do: "#{gettext("Price")} (#{currency()})"
+
   @doc ~S|Formats a price for display, or returns "–" for nil.|
   def format_price(nil), do: "–"
 
   def format_price(%Decimal{} = price) do
-    price |> Decimal.round(2) |> Decimal.to_string(:normal) |> localize_decimal()
+    amount = price |> Decimal.round(2) |> Decimal.to_string(:normal) |> localize_decimal()
+    "#{amount} #{currency()}"
   end
 
   def format_price(price) when is_number(price),
@@ -38,6 +42,10 @@ defmodule PresswerkWeb.PreorderComponents do
     if Gettext.get_locale(PresswerkWeb.Gettext) == "de",
       do: String.replace(str, ".", ","),
       else: str
+  end
+
+  defp currency do
+    Application.get_env(:presswerk, :currency, "EUR")
   end
 
   @doc "Formats a date as a localized month and year (e.g. \"October 2026\")."
