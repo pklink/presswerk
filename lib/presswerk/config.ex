@@ -17,6 +17,7 @@ defmodule Presswerk.Config do
   Currently supported keys:
 
     * `"default_locale"` - default UI language (`"en"` or `"de"`)
+    * `"currency"` - currency code shown next to prices (default `"EUR"`)
   """
   def load do
     path = System.get_env("PRESSWERK_CONFIG", @default_path)
@@ -40,6 +41,10 @@ defmodule Presswerk.Config do
   defp apply(config) when is_map(config) do
     if locale = config["default_locale"] do
       Application.put_env(:presswerk, :default_locale, locale)
+    end
+
+    if currency = config["currency"] do
+      Application.put_env(:presswerk, :currency, currency)
     end
   end
 
