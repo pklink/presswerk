@@ -8,6 +8,7 @@ services:
       PHX_HOST: ${PHX_HOST:-localhost}
     volumes:
       - presswerk-data:/data
+      # - ./config:/config:ro
     restart: unless-stopped
 
 volumes:

@@ -39,8 +39,18 @@ defmodule PresswerkWeb.Locale do
   @doc """
   Normalizes a locale string to a supported locale (`"en"` or `"de"`).
 
-  Falls back to `"en"` for unsupported or nil values.
+  Falls back to the configured default locale (`config/presswerk.json`,
+  key `"default_locale"`) for unsupported or nil values, and to `"en"`
+  if the configured default is not supported.
   """
   def normalize(locale) when locale in ~w(en de), do: locale
-  def normalize(_locale), do: "en"
+  def normalize(_locale), do: default_locale()
+
+  @doc false
+  defp default_locale do
+    case Application.get_env(:presswerk, :default_locale, "en") do
+      locale when locale in ~w(en de) -> locale
+      _ -> "en"
+    end
+  end
 end
