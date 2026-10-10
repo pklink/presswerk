@@ -22,14 +22,17 @@ defmodule Presswerk.ConfigTest do
       end
     end
 
-    test "missing file does not raise and leaves env unchanged" do
+    test "missing file logs warning and leaves env unchanged" do
       original = Application.get_env(:presswerk, :default_locale)
 
       try do
         System.put_env("PRESSWERK_CONFIG", "config/does_not_exist.json")
         Application.delete_env(:presswerk, :default_locale)
 
-        assert :ok = Config.load()
+        log = capture_log(fn -> assert :ok = Config.load() end)
+
+        assert log =~ "Config file not found"
+        assert log =~ "config/does_not_exist.json"
         assert Application.get_env(:presswerk, :default_locale) == nil
       after
         restore_env(original)

@@ -3,8 +3,8 @@ defmodule Presswerk.Config do
   Loads user configuration from a JSON file at application startup.
 
   The file path defaults to `config/presswerk.json` and can be overridden
-  with the `PRESSWERK_CONFIG` environment variable. A missing file is not
-  an error; defaults are used instead.
+  with the `PRESSWERK_CONFIG` environment variable. A missing file logs a
+  warning; defaults are used instead.
   """
 
   require Logger
@@ -29,6 +29,8 @@ defmodule Presswerk.Config do
         {:error, reason} ->
           Logger.warning("Could not load config file #{path}: #{inspect(reason)}")
       end
+    else
+      Logger.warning("Config file not found at #{path}, using defaults")
     end
 
     :ok
