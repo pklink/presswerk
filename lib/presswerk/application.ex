@@ -8,6 +8,8 @@ defmodule Presswerk.Application do
   @doc "Starts the application supervisor with all child processes."
   @impl true
   def start(_type, _args) do
+    Presswerk.Config.load()
+
     children = [
       PresswerkWeb.Telemetry,
       Presswerk.Repo,

@@ -69,6 +69,31 @@ defmodule PresswerkWeb.LocaleTest do
     assert html =~ "Vorbestellung gespeichert."
   end
 
+  test "configured default locale is used when no session locale is set", %{conn: conn} do
+    Application.put_env(:presswerk, :default_locale, "de")
+
+    try do
+      conn = get(conn, ~p"/")
+      assert html_response(conn, 200) =~ ~s(lang="de")
+
+      {:ok, _view, html} = live(conn)
+      assert html =~ "Vorbestellungen"
+    after
+      Application.delete_env(:presswerk, :default_locale)
+    end
+  end
+
+  test "invalid configured default locale falls back to English", %{conn: conn} do
+    Application.put_env(:presswerk, :default_locale, "fr")
+
+    try do
+      conn = get(conn, ~p"/")
+      assert html_response(conn, 200) =~ ~s(lang="en")
+    after
+      Application.delete_env(:presswerk, :default_locale)
+    end
+  end
+
   test "unsupported locales fall back to English and redirects stay local", %{conn: conn} do
     conn = init_test_session(conn, %{locale: "fr"})
     {:ok, _, html} = live(conn, ~p"/")

@@ -45,3 +45,6 @@ npm-debug.log
 
 # Local Docker configuration
 /.env
+
+# User-specific config file (copy from config/presswerk.example.json)
+/config/presswerk.json

@@ -33,6 +33,26 @@ mise run dev
 
 Open <http://localhost:4000>. `mise run setup` installs dependencies, sets up the database, and builds assets.
 
+## Configuration
+
+Presswerk reads an optional JSON config file at startup. Copy the example and adjust it:
+
+```sh
+cp config/presswerk.example.json config/presswerk.json
+```
+
+```json
+{
+  "default_locale": "en"
+}
+```
+
+| Key | Values | Description |
+|:----|:-------|:------------|
+| `default_locale` | `"en"`, `"de"` | Default UI language for new visitors. Users can still switch languages in the footer; their choice is stored in the browser session. |
+
+The file path defaults to `config/presswerk.json` and can be changed with the `PRESSWERK_CONFIG` environment variable. A missing file is not an error; defaults are used.
+
 ## Run with Docker
 
 ### Docker Compose
@@ -44,6 +64,12 @@ SECRET_KEY_BASE=<generated secret>
 ```
 
 Start the app with `docker compose up -d --build` and open <http://localhost:4000>. The SQLite database is stored in the `presswerk-data` Docker volume; migrations run when the container starts. Keep the same secret across restarts and do not commit the `.env` file. When deploying behind an HTTPS reverse proxy, set `PHX_HOST` in `.env` to the public hostname.
+
+To change the default language, mount a config file and point `PRESSWERK_CONFIG` to it:
+
+```sh
+docker run -e PRESSWERK_CONFIG=/data/presswerk.json -v ./presswerk.json:/data/presswerk.json:ro ...
+```
 
 **Note:** Presswerk has no login. The default Docker configuration publishes port 4000, so do not expose an instance with personal data to the internet without access protection.
 
