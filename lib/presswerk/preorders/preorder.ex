@@ -15,6 +15,7 @@ defmodule Presswerk.Preorders.Preorder do
     field :article_url, :string
     field :order_url, :string
     field :notes, :string
+    field :price, :decimal
 
     timestamps(type: :utc_datetime)
   end
@@ -37,7 +38,8 @@ defmodule Presswerk.Preorders.Preorder do
       :cover_url,
       :article_url,
       :order_url,
-      :notes
+      :notes,
+      :price
     ])
     |> update_change(:artist, &trim_artist/1)
     |> update_change(:album, &trim/1)

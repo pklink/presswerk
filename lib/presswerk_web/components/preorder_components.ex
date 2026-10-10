@@ -21,6 +21,10 @@ defmodule PresswerkWeb.PreorderComponents do
     Calendar.strftime(date, format)
   end
 
+  def format_price(nil), do: "–"
+  def format_price(%Decimal{} = price), do: Decimal.to_string(price)
+  def format_price(price) when is_number(price), do: to_string(price)
+
   def format_month(%Date{} = date) do
     months = [
       gettext("January"),

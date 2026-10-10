@@ -93,6 +93,8 @@ defmodule PresswerkWeb.PreorderLive.Show do
               </a>
               <span :if={!@preorder.order_url}>–</span>
             </dd>
+            <dt class="text-base-content/60">{gettext("Price")}</dt>
+            <dd>{format_price(@preorder.price)}</dd>
           </dl>
 
           <div :if={@preorder.notes}>
