@@ -22,8 +22,19 @@ defmodule PresswerkWeb.PreorderComponents do
   end
 
   def format_price(nil), do: "–"
-  def format_price(%Decimal{} = price), do: Decimal.to_string(price)
-  def format_price(price) when is_number(price), do: to_string(price)
+
+  def format_price(%Decimal{} = price) do
+    price |> Decimal.round(2) |> Decimal.to_string(:normal) |> localize_decimal()
+  end
+
+  def format_price(price) when is_number(price),
+    do: price |> Decimal.from_float() |> format_price()
+
+  defp localize_decimal(str) do
+    if Gettext.get_locale(PresswerkWeb.Gettext) == "de",
+      do: String.replace(str, ".", ","),
+      else: str
+  end
 
   def format_month(%Date{} = date) do
     months = [
