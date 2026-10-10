@@ -126,7 +126,7 @@ defmodule PresswerkWeb.PreorderLive.Form do
         <.input field={@form[:cover_url]} type="url" label={gettext("Cover URL")} />
         <.input field={@form[:article_url]} type="url" label={gettext("Article URL")} />
         <.input field={@form[:order_url]} type="url" label={gettext("Order URL")} />
-        <.input field={@form[:price]} type="number" label={gettext("Price")} step="0.01" />
+        <.input field={@form[:price]} type="number" label={price_label()} step="0.01" />
         <.input field={@form[:notes]} type="textarea" label={gettext("Notes")} rows="3" />
 
         <div class="flex gap-2 mt-2">
