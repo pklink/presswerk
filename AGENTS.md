@@ -11,6 +11,6 @@ Personal web app for tracking vinyl preorders (single user, no login). UI suppor
 - **UI:** No modal dialogs; deleting uses `data-confirm`. Must stay usable on mobile and desktop. daisyUI for basic components (`btn`, `badge`, `table`, `input`), Tailwind for the rest. Amber accent color, subtle vinyl motif (`.vinyl` in `assets/css/app.css`), no kitschy retro look.
 - **Tests:** Reuse `Presswerk.PreordersFixtures`; give new templates unique DOM IDs for LiveView tests.
 - **Workflow:** `mise run setup` for local developer setup; run `mix precommit` before finishing.
-- **Commits & PRs:** Conventional Commits. No body, no unnecessary prose.
+- **Commits & PRs:** Conventional Commits. No commit body; concise PR descriptions.
 - **Renovate branches:** When working on a Renovate branch, add the `stop-updating` label to its pull request.
 - **Templates:** Use class lists in HEEx and the existing icon/input components. Keep Tailwind v4 imports; no `@apply`, external scripts or inline `<script>` tags.
