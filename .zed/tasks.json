@@ -1,0 +1,19 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+[
+  {
+    "label": "mise setup",
+    "command": "mise run setup"
+  },
+  {
+    "label": "mise dev",
+    "command": "mise run dev"
+  },
+  {
+    "label": "mix test",
+    "command": "mise run test"
+  },
+  {
+    "label": "mise check",
+    "command": "mise run check"
+  }
+]

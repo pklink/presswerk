@@ -31,11 +31,3 @@ arg "<part>" help="Version part to bump" {
 }
 '''
 run = 'elixir scripts/release.exs "${usage_part?}"'
-
-[tasks."db:migrate"]
-description = "Run database migrations"
-run = "mix ecto.migrate"
-
-[tasks."assets:build"]
-description = "Rebuild assets"
-run = "mix assets.build"
