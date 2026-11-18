@@ -14,3 +14,7 @@ Personal web app for tracking vinyl preorders (single user, no login). UI suppor
 - **Commits & PRs:** Conventional Commits. No commit body; concise PR descriptions.
 - **Renovate branches:** When working on a Renovate branch, add the `stop-updating` label to its pull request.
 - **Templates:** Use class lists in HEEx and the existing icon/input components. Keep Tailwind v4 imports; no `@apply`, external scripts or inline `<script>` tags.
+
+## Review guidelines
+
+- For pull request reviews, follow `.opencode/skills/pr-review/SKILL.md`.
