@@ -52,6 +52,8 @@ defmodule PresswerkWeb.PreorderLive.Show do
   @doc "Renders the preorder detail page."
   @impl true
   def render(assigns) do
+    assigns = assign(assigns, :has_cover, assigns.preorder.cover_url not in [nil, ""])
+
     ~H"""
     <Layouts.app flash={@flash} active={:preorders} locale={@locale} current_path={@current_path}>
       <.link navigate={~p"/preorders"} class="text-sm text-base-content/70 hover:text-primary">
@@ -61,16 +63,19 @@ defmodule PresswerkWeb.PreorderLive.Show do
       <div class="grid gap-6 sm:grid-cols-[12rem_minmax(0,1fr)]">
         <div class="w-40 sm:w-full">
           <img
-            :if={@preorder.cover_url}
+            :if={@has_cover}
+            id="preorder-cover"
             src={@preorder.cover_url}
             alt={gettext("Cover of %{album}", album: @preorder.album)}
             class="w-full aspect-square object-cover rounded-box border border-base-300"
           />
           <div
-            :if={!@preorder.cover_url}
-            class="vinyl w-full aspect-square rounded-full opacity-80"
+            :if={!@has_cover}
+            id="preorder-cover-placeholder"
+            class="w-full aspect-square rounded-box border border-base-300 bg-base-200 p-4"
             aria-hidden="true"
           >
+            <div class="vinyl size-full rounded-full opacity-80"></div>
           </div>
         </div>
 
@@ -79,18 +84,27 @@ defmodule PresswerkWeb.PreorderLive.Show do
             <p :if={@preorder.artist} class="text-base-content/70 wrap-anywhere">
               {@preorder.artist}
             </p>
+
             <h1 class="text-3xl font-bold wrap-anywhere">{@preorder.album}</h1>
+
             <div id="preorder-status" class="mt-2"><.status_badge status={@preorder.status} /></div>
           </div>
 
           <dl class="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-sm sm:gap-x-6">
             <dt class="text-base-content/60">{gettext("Shop")}</dt>
+
             <dd class="wrap-anywhere">{@preorder.shop || "–"}</dd>
+
             <dt class="text-base-content/60">{gettext("Ordered on")}</dt>
+
             <dd>{format_date(@preorder.ordered_at)}</dd>
+
             <dt class="text-base-content/60">{gettext("Release")}</dt>
+
             <dd>{format_date(@preorder.release_date)}</dd>
+
             <dt class="text-base-content/60">{gettext("Article URL")}</dt>
+
             <dd class="break-all">
               <a
                 :if={@preorder.article_url}
@@ -103,7 +117,9 @@ defmodule PresswerkWeb.PreorderLive.Show do
               </a>
               <span :if={!@preorder.article_url}>–</span>
             </dd>
+
             <dt class="text-base-content/60">{gettext("Order URL")}</dt>
+
             <dd class="break-all">
               <a
                 :if={@preorder.order_url}
@@ -116,12 +132,15 @@ defmodule PresswerkWeb.PreorderLive.Show do
               </a>
               <span :if={!@preorder.order_url}>–</span>
             </dd>
+
             <dt class="text-base-content/60">{gettext("Price")}</dt>
+
             <dd>{format_price(@preorder.price)}</dd>
           </dl>
 
           <div :if={@preorder.notes}>
             <h2 class="text-sm text-base-content/60 mb-1">{gettext("Notes")}</h2>
+
             <p class="whitespace-pre-line wrap-anywhere">{@preorder.notes}</p>
           </div>
 
@@ -141,6 +160,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
             >
               <.icon name="hero-truck-micro" class="size-4" /> {gettext("Mark as shipped")}
             </button>
+
             <button
               :if={:received in Preorder.quick_status_targets(@preorder.status)}
               id="mark-as-received"
@@ -164,6 +184,7 @@ defmodule PresswerkWeb.PreorderLive.Show do
             >
               <.icon name="hero-pencil-square-micro" class="size-4" /> {gettext("Edit")}
             </.link>
+
             <button
               id="delete-preorder"
               phx-click="delete"

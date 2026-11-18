@@ -340,6 +340,36 @@ defmodule PresswerkWeb.PreorderLiveTest do
       assert html =~ "Klarer Vinyl"
     end
 
+    test "shows the vinyl placeholder when no cover URL is set", %{conn: conn} do
+      preorder = preorder_fixture()
+      {:ok, view, _} = live(conn, ~p"/preorders/#{preorder}")
+
+      assert has_element?(view, "#preorder-cover-placeholder[aria-hidden=true] .vinyl")
+      refute has_element?(view, "img#preorder-cover")
+    end
+
+    test "shows the vinyl placeholder when the cover URL is blank", %{conn: conn} do
+      preorder = preorder_fixture(%{cover_url: ""})
+      {:ok, view, _} = live(conn, ~p"/preorders/#{preorder}")
+
+      assert has_element?(view, "#preorder-cover-placeholder .vinyl")
+      refute has_element?(view, "img#preorder-cover")
+    end
+
+    test "keeps the existing cover and its alternate text", %{conn: conn} do
+      preorder =
+        preorder_fixture(%{album: "Sample Record", cover_url: "https://example.test/cover.png"})
+
+      {:ok, view, _} = live(conn, ~p"/preorders/#{preorder}")
+
+      assert has_element?(
+               view,
+               ~s(img#preorder-cover[src="https://example.test/cover.png"][alt="Cover of Sample Record"])
+             )
+
+      refute has_element?(view, "#preorder-cover-placeholder")
+    end
+
     test "bearbeitet", %{conn: conn} do
       p = preorder_fixture()
       {:ok, view, _} = live(conn, ~p"/preorders/#{p}/edit")
