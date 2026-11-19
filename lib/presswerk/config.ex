@@ -52,11 +52,16 @@ defmodule Presswerk.Config do
         :ok
     end
 
-    case config["currency"] do
-      currency when is_binary(currency) and currency != "" ->
+    case Map.fetch(config, "currency") do
+      {:ok, currency} when is_binary(currency) and currency != "" ->
         Application.put_env(:presswerk, :currency, currency)
 
-      _ ->
+      {:ok, currency} ->
+        Logger.warning(
+          "Invalid currency in config, expected a non-empty string: #{inspect(currency)}"
+        )
+
+      :error ->
         :ok
     end
   end

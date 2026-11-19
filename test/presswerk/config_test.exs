@@ -86,17 +86,22 @@ defmodule Presswerk.ConfigTest do
       end
     end
 
-    test "ignores invalid currency values" do
+    test "rejects invalid currency values with a warning and leaves env unchanged" do
       path = tmp_path()
-      File.write!(path, ~s({"currency": ""}))
       original_currency = Application.get_env(:presswerk, :currency)
       original_config = System.get_env("PRESSWERK_CONFIG")
 
       try do
         System.put_env("PRESSWERK_CONFIG", path)
-        Application.delete_env(:presswerk, :currency)
-        assert :ok = Config.load()
-        assert Application.get_env(:presswerk, :currency) == nil
+        Application.put_env(:presswerk, :currency, "USD")
+
+        for currency <- ["", 42, false, nil, [], %{}] do
+          File.write!(path, Jason.encode!(%{"currency" => currency}))
+          log = capture_log(fn -> assert :ok = Config.load() end)
+
+          assert log =~ "Invalid currency"
+          assert Application.get_env(:presswerk, :currency) == "USD"
+        end
       after
         restore_currency(original_currency)
         restore_presswerk_config(original_config)
