@@ -13,7 +13,7 @@ defmodule PresswerkWeb.DashboardLive do
      socket
      |> assign(:page_title, gettext("Dashboard"))
      |> assign(:stats, Preorders.stats())
-     |> assign(:months, Preorders.upcoming_by_month())}
+     |> assign(:months, Preorders.open_by_release_month())}
   end
 
   @doc "Renders the dashboard with stats and upcoming releases."

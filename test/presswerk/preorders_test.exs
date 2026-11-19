@@ -229,18 +229,29 @@ defmodule Presswerk.PreordersTest do
       assert Preorders.stats() == %{open: 2, received: 1, cancelled: 2}
     end
 
-    test "upcoming_by_month/0 gruppiert offene Platten nach Monat" do
+    test "open_by_release_month/0 groups open preorders by release month" do
       preorder_fixture(%{artist: "B", release_date: ~D[2026-12-05]})
       preorder_fixture(%{artist: "A", release_date: ~D[2026-11-20]})
       preorder_fixture(%{artist: "C", release_date: ~D[2026-12-01]})
       preorder_fixture(%{release_date: ~D[2026-11-01], status: :received})
+      preorder_fixture(%{release_date: ~D[2026-11-01], status: :cancelled})
       preorder_fixture(%{release_date: nil})
 
       assert [
                {~D[2026-11-01], [%{artist: "A"}]},
                {~D[2026-12-01], [%{artist: "C"}, %{artist: "B"}]}
              ] =
-               Preorders.upcoming_by_month()
+               Preorders.open_by_release_month()
+    end
+
+    test "open_by_release_month/0 includes past release dates for both open statuses" do
+      release_date = Date.add(Date.utc_today(), -1)
+      preordered = preorder_fixture(%{release_date: release_date, status: :preordered})
+      shipped = preorder_fixture(%{release_date: release_date, status: :shipped})
+
+      assert [{month, preorders}] = Preorders.open_by_release_month()
+      assert month == Date.beginning_of_month(release_date)
+      assert Enum.sort(Enum.map(preorders, & &1.id)) == Enum.sort([preordered.id, shipped.id])
     end
   end
 end
