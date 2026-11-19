@@ -17,4 +17,9 @@ Personal web app for tracking vinyl preorders (single user, no login). UI suppor
 
 ## Review guidelines
 
-- For pull request reviews, follow `.opencode/skills/pr-review/SKILL.md`.
+- Read the surrounding code, callers, called functions, and tests before reporting a finding.
+- Focus on actionable bugs, data loss, and race conditions, not style.
+- This is a single-user app, but concurrent browser tabs are realistic.
+- Report only findings with a concrete triggering scenario and observable impact.
+- Write findings in English. Include the affected file and function, reproduction steps with observable results, and user-visible impact.
+- Explain why existing safeguards do not prevent the issue where relevant.

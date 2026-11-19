@@ -9,10 +9,9 @@ Reviews a pull request and posts findings as GitHub PR comments via `gh`.
 
 ## Review
 
-1. Read `gh pr view <N> --json title,body,files` and `gh pr diff <N>`.
-2. Read the code the diff touches: callers of changed functions, the functions it calls, the tests. Fetch PR-head versions with `gh api repos/pklink/presswerk/contents/<path>?ref=<headOid> -H 'Accept: application/vnd.github.raw+json'`; never check out the branch.
-3. Judge against the app's context: single user, but multiple open tabs are realistic. Look for bugs, data loss, and races between tabs - not style.
-4. Every finding needs a concrete case: this input or situation leads to this wrong result. No case, no comment.
+1. Read the review guidelines in the repository root `AGENTS.md` and apply them.
+2. Read `gh pr view <N> --json title,body,files,headRefOid` and `gh pr diff <N>`.
+3. Fetch the required PR-head files with `gh api repos/pklink/presswerk/contents/<path>?ref=<headOid> -H 'Accept: application/vnd.github.raw+json'`, using `headRefOid` from step 2; never check out the branch.
 
 ## Comment format
 
