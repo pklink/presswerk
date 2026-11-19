@@ -39,8 +39,17 @@ defmodule Presswerk.Config do
 
   @doc false
   defp apply(config) when is_map(config) do
-    if locale = config["default_locale"] do
-      Application.put_env(:presswerk, :default_locale, locale)
+    case Map.fetch(config, "default_locale") do
+      {:ok, locale} when locale in ~w(en de) ->
+        Application.put_env(:presswerk, :default_locale, locale)
+
+      {:ok, locale} ->
+        Logger.warning(
+          "Invalid default_locale in config, expected \"en\" or \"de\": #{inspect(locale)}"
+        )
+
+      :error ->
+        :ok
     end
 
     case config["currency"] do
