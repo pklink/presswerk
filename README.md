@@ -3,14 +3,14 @@
 **Keep track of your vinyl preorders.** Presswerk (German for "pressing plant", pronounced /ˈpʁɛsˌvɛʁk/) is a small, self-hosted app for one person. No login, no external services - just your records in a local SQLite database.
 
 <p>
-  <img src="docs/screenshots/dashboard.png" alt="Presswerk dashboard with preorder counts and upcoming releases grouped by month" width="960">
+  <img src="docs/screenshots/dashboard.png" alt="Presswerk dashboard with preorder counts and open preorders grouped by release month" width="960">
 </p>
 
 ## Features
 
 - Create, edit, and delete preorders with artist, album, shop, order and release dates, links, and notes
 - Track statuses: preordered, shipped, received, or cancelled
-- View status counts and upcoming releases grouped by month on the dashboard
+- View status counts and open preorders grouped by release month on the dashboard
 - Search by artist or album, filter by status, and sort by release date or artist
 
 The UI supports English (default) and German. Switch languages in the footer; your choice is stored in your browser session. Built with Elixir, Phoenix LiveView, and SQLite.

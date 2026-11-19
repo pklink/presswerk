@@ -1,12 +1,12 @@
 defmodule PresswerkWeb.DashboardLive do
-  @moduledoc "Dashboard with statistics and upcoming releases."
+  @moduledoc "Dashboard with statistics and open preorders by release month."
   use PresswerkWeb, :live_view
 
   import PresswerkWeb.PreorderComponents
 
   alias Presswerk.Preorders
 
-  @doc "Mounts the dashboard and loads statistics and upcoming releases."
+  @doc "Mounts the dashboard and loads statistics and open preorders by release month."
   @impl true
   def mount(_params, _session, socket) do
     {:ok,
@@ -16,7 +16,7 @@ defmodule PresswerkWeb.DashboardLive do
      |> assign(:months, Preorders.open_by_release_month())}
   end
 
-  @doc "Renders the dashboard with stats and upcoming releases."
+  @doc "Renders the dashboard with stats and open preorders by release month."
   @impl true
   def render(assigns) do
     ~H"""
@@ -28,7 +28,9 @@ defmodule PresswerkWeb.DashboardLive do
       </section>
 
       <section>
-        <h2 class="text-xl font-bold mb-4">{gettext("Upcoming releases")}</h2>
+        <h2 id="open-preorders-heading" class="text-xl font-bold mb-4">
+          {gettext("Open preorders by release month")}
+        </h2>
 
         <div
           :if={@months == []}

@@ -38,6 +38,13 @@ defmodule PresswerkWeb.LocaleTest do
       view |> element("nav a[href='/']") |> render_click() |> follow_redirect(conn)
 
     assert html =~ "März 2026"
+
+    assert has_element?(
+             dashboard,
+             "#open-preorders-heading",
+             "Offene Vorbestellungen nach Veröffentlichungsmonat"
+           )
+
     assert has_element?(dashboard, "#stat-open", "Offene Vorbestellungen")
 
     conn = conn |> recycle() |> post(~p"/locale", %{locale: "en", return_to: "/"})

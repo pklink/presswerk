@@ -8,7 +8,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Aktionen"
 
-#: lib/presswerk_web/live/dashboard_live.ex:40
+#: lib/presswerk_web/live/dashboard_live.ex:42
 #, elixir-autogen, elixir-format
 msgid "Add preorder"
 msgstr "Vorbestellung erfassen"
@@ -20,7 +20,7 @@ msgid "Album"
 msgstr "Album"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:127
-#: lib/presswerk_web/live/preorder_live/show.ex:93
+#: lib/presswerk_web/live/preorder_live/show.ex:106
 #, elixir-autogen, elixir-format
 msgid "Article URL"
 msgstr "Artikel-URL"
@@ -46,7 +46,7 @@ msgstr "Artist"
 msgid "August"
 msgstr "August"
 
-#: lib/presswerk_web/live/preorder_live/show.ex:58
+#: lib/presswerk_web/live/preorder_live/show.ex:60
 #, elixir-autogen, elixir-format
 msgid "Back to overview"
 msgstr "Zurück zur Übersicht"
@@ -91,7 +91,7 @@ msgstr "Schließen"
 msgid "Cover URL"
 msgstr "Cover-URL"
 
-#: lib/presswerk_web/live/preorder_live/show.ex:66
+#: lib/presswerk_web/live/preorder_live/show.ex:69
 #, elixir-autogen, elixir-format
 msgid "Cover of %{album}"
 msgstr "Cover von %{album}"
@@ -107,13 +107,13 @@ msgstr "Dashboard"
 msgid "December"
 msgstr "Dezember"
 
-#: lib/presswerk_web/live/preorder_live/show.ex:160
+#: lib/presswerk_web/live/preorder_live/show.ex:194
 #, elixir-autogen, elixir-format
 msgid "Delete"
 msgstr "Löschen"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:42
-#: lib/presswerk_web/live/preorder_live/show.ex:152
+#: lib/presswerk_web/live/preorder_live/show.ex:185
 #, elixir-autogen, elixir-format
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -175,7 +175,7 @@ msgstr "Neue Vorbestellung"
 msgid "No connection"
 msgstr "Keine Verbindung"
 
-#: lib/presswerk_web/live/dashboard_live.ex:38
+#: lib/presswerk_web/live/dashboard_live.ex:40
 #, elixir-autogen, elixir-format
 msgid "No open preorders with a release date."
 msgstr "Keine offenen Vorbestellungen mit Release-Datum."
@@ -186,7 +186,7 @@ msgid "No preorders found."
 msgstr "Keine Vorbestellungen gefunden."
 
 #: lib/presswerk_web/live/preorder_live/form.ex:130
-#: lib/presswerk_web/live/preorder_live/show.ex:124
+#: lib/presswerk_web/live/preorder_live/show.ex:142
 #, elixir-autogen, elixir-format
 msgid "Notes"
 msgstr "Notizen"
@@ -207,13 +207,13 @@ msgid "Open preorders"
 msgstr "Offene Vorbestellungen"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:123
-#: lib/presswerk_web/live/preorder_live/show.ex:89
+#: lib/presswerk_web/live/preorder_live/show.ex:98
 #, elixir-autogen, elixir-format
 msgid "Ordered on"
 msgstr "Bestellt am"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:128
-#: lib/presswerk_web/live/preorder_live/show.ex:106
+#: lib/presswerk_web/live/preorder_live/show.ex:121
 #, elixir-autogen, elixir-format
 msgid "Order URL"
 msgstr "Bestell-URL"
@@ -240,7 +240,7 @@ msgstr "Vorbestellt"
 msgid "Preorders"
 msgstr "Vorbestellungen"
 
-#: lib/presswerk_web/live/preorder_live/show.ex:157
+#: lib/presswerk_web/live/preorder_live/show.ex:191
 #, elixir-autogen, elixir-format
 msgid "Really delete this preorder?"
 msgstr "Diese Vorbestellung wirklich löschen?"
@@ -268,7 +268,7 @@ msgstr "Platten"
 
 #: lib/presswerk_web/live/preorder_live/index.ex:108
 #: lib/presswerk_web/live/preorder_live/index.ex:133
-#: lib/presswerk_web/live/preorder_live/show.ex:91
+#: lib/presswerk_web/live/preorder_live/show.ex:102
 #, elixir-autogen, elixir-format
 msgid "Release"
 msgstr "Release"
@@ -285,8 +285,8 @@ msgid "Save"
 msgstr "Speichern"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:133
-#: lib/presswerk_web/live/preorder_live/show.ex:135
-#: lib/presswerk_web/live/preorder_live/show.ex:146
+#: lib/presswerk_web/live/preorder_live/show.ex:158
+#: lib/presswerk_web/live/preorder_live/show.ex:170
 #, elixir-autogen, elixir-format
 msgid "Saving …"
 msgstr "Speichere …"
@@ -313,7 +313,7 @@ msgstr "Versendet"
 
 #: lib/presswerk_web/live/preorder_live/form.ex:111
 #: lib/presswerk_web/live/preorder_live/index.ex:107
-#: lib/presswerk_web/live/preorder_live/show.ex:87
+#: lib/presswerk_web/live/preorder_live/show.ex:94
 #, elixir-autogen, elixir-format
 msgid "Shop"
 msgstr "Shop"
@@ -335,10 +335,10 @@ msgstr "Sortierung"
 msgid "Status"
 msgstr "Status"
 
-#: lib/presswerk_web/live/dashboard_live.ex:31
+#: lib/presswerk_web/live/dashboard_live.ex:32
 #, elixir-autogen, elixir-format
-msgid "Upcoming releases"
-msgstr "Kommende Veröffentlichungen"
+msgid "Open preorders by release month"
+msgstr "Offene Vorbestellungen nach Veröffentlichungsmonat"
 
 #: lib/presswerk_web/components/layouts.ex:212
 #, elixir-autogen, elixir-format
@@ -370,18 +370,18 @@ msgstr "Presswerk auf GitHub"
 msgid "Could not update status. Please reload and try again."
 msgstr "Status konnte nicht aktualisiert werden. Bitte neu laden und erneut versuchen."
 
-#: lib/presswerk_web/live/preorder_live/show.ex:149
+#: lib/presswerk_web/live/preorder_live/show.ex:173
 #, elixir-autogen, elixir-format
 msgid "Mark as received"
 msgstr "Als erhalten markieren"
 
-#: lib/presswerk_web/live/preorder_live/show.ex:138
+#: lib/presswerk_web/live/preorder_live/show.ex:161
 #, elixir-autogen, elixir-format
 msgid "Mark as shipped"
 msgstr "Als versendet markieren"
 
 #: lib/presswerk_web/components/preorder_components.ex:28
-#: lib/presswerk_web/live/preorder_live/show.ex:119
+#: lib/presswerk_web/live/preorder_live/show.ex:136
 #, elixir-autogen, elixir-format
 msgid "Price"
 msgstr "Preis"
