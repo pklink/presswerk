@@ -13,6 +13,7 @@ defmodule PresswerkWeb.PreorderLiveTest do
 
       {:ok, view, html} = live(conn, ~p"/")
       assert html =~ "Keep track of your vinyl preorders."
+      assert has_element?(view, "#open-preorders-heading", "Open preorders by release month")
       assert has_element?(view, "#stat-open", "1")
       assert has_element?(view, "#stat-received", "1")
       assert has_element?(view, "#month-2026-11", "Artist A")

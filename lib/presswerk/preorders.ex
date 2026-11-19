@@ -131,11 +131,11 @@ defmodule Presswerk.Preorders do
   end
 
   @doc """
-  Open preorders with a release date, grouped by month.
+  Open preorders with a release date, including past dates, grouped by month.
 
   Returns `[{%Date{day: 1}, [preorder, ...]}, ...]` sorted ascending.
   """
-  def upcoming_by_month do
+  def open_by_release_month do
     Preorder
     |> where([p], p.status in ^Preorder.open_statuses() and not is_nil(p.release_date))
     |> order_by([p], asc: p.release_date, asc: fragment("lower(?)", p.artist))
