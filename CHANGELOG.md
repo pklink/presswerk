@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.5.0](https://github.com/pklink/presswerk/releases/tag/v0.5.0) - 2026-11-19
+
+- Added quick status actions to preorder details, with validated transitions and protection against stale updates.
+- Improved the mobile layout of preorder actions.
+- Fixed the vinyl cover placeholder for missing or empty cover URLs.
+- Updated Elixir to 1.20.5, OTP to 29.1.2, and daisyUI to 5.8.1.
+- Added multi-architecture container builds to pull request checks.
+- Simplified development tasks and updated OpenCode tooling and contributor workflows.
+
 ## [0.4.0](https://github.com/pklink/presswerk/releases/tag/v0.4.0) - 2026-10-11
 
 - Added optional decimal prices to preorders, including a database migration, non-negative two-decimal-place validation, form input, and localized detail-page formatting.
