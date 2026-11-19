@@ -14,7 +14,7 @@ defmodule Presswerk.Preorders do
   Options:
 
     * `:search` - Substring in artist or album
-    * `:status` - Status as atom or string (empty/`"all"` = all)
+    * `:status` - Status as atom or string (empty, "all" or invalid = all)
     * `:sort` - `:release_date` (default) or `:artist`
   """
   def list_preorders(opts \\ []) do
@@ -45,14 +45,18 @@ defmodule Presswerk.Preorders do
 
   defp escape_like(term), do: String.replace(term, ~r/([\\%_])/, "\\\\\\1")
 
-  defp filter_status(query, status) when status in ["", "all", nil], do: query
-
   defp filter_status(query, status) do
-    where(query, [p], p.status == ^to_status(status))
+    case to_status(status) do
+      nil -> query
+      status -> where(query, [p], p.status == ^status)
+    end
   end
 
-  defp to_status(status) when is_atom(status), do: status
-  defp to_status(status) when is_binary(status), do: String.to_existing_atom(status)
+  defp to_status(status) do
+    Enum.find(Preorder.statuses(), fn status_value ->
+      status in [status_value, Atom.to_string(status_value)]
+    end)
+  end
 
   # Entries without a release date are sorted last.
   defp sort(query, :artist) do

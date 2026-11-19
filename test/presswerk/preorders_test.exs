@@ -211,10 +211,19 @@ defmodule Presswerk.PreordersTest do
       assert Preorders.list_preorders(search: "%") == []
     end
 
-    test "filtert nach Status", %{b: b} do
+    test "filtert nach Status als String und Atom", %{b: b} do
       assert [%{id: id}] = Preorders.list_preorders(status: "received")
       assert id == b.id
-      assert length(Preorders.list_preorders(status: "all")) == 3
+      assert [%{id: id}] = Preorders.list_preorders(status: :received)
+      assert id == b.id
+    end
+
+    test "leerer oder ungültiger Status filtert nicht", %{a: a, b: b, c: c} do
+      ids = Enum.sort([a.id, b.id, c.id])
+
+      for status <- ["", "all", nil, "bogus", "artist", :artist] do
+        assert Enum.sort(Enum.map(Preorders.list_preorders(status: status), & &1.id)) == ids
+      end
     end
   end
 
