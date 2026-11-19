@@ -37,7 +37,6 @@ defmodule Presswerk.Config do
     :ok
   end
 
-  @doc false
   defp apply(config) when is_map(config) do
     case Map.fetch(config, "default_locale") do
       {:ok, locale} when locale in ~w(en de) ->
@@ -66,7 +65,6 @@ defmodule Presswerk.Config do
     end
   end
 
-  @doc false
   defp apply(other) do
     Logger.warning("Unexpected config file content, expected a JSON object: #{inspect(other)}")
   end
