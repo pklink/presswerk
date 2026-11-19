@@ -54,6 +54,18 @@ defmodule PresswerkWeb.PreorderLiveTest do
       assert has_element?(view, "#preorder-#{b.id}")
     end
 
+    test "ungültiger Status-Parameter zeigt alle an und wählt \"All statuses\"", %{
+      conn: conn,
+      a: a,
+      b: b
+    } do
+      {:ok, view, _} = live(conn, ~p"/preorders?status=bogus")
+
+      assert has_element?(view, "#preorder-#{a.id}")
+      assert has_element?(view, "#preorder-#{b.id}")
+      assert has_element?(view, ~s(select[name="status"] option[value=""][selected]))
+    end
+
     test "Sortierung nach Artist", %{conn: conn, a: a, b: b} do
       {:ok, view, _} = live(conn, ~p"/preorders?sort=artist")
       html = render(view)
