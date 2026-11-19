@@ -1,4 +1,4 @@
-FROM hexpm/elixir:1.20.4-erlang-29.1.2-debian-bookworm-20261005-slim AS builder
+FROM hexpm/elixir:1.20.5-erlang-29.1.2-debian-bookworm-20261104-slim AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
