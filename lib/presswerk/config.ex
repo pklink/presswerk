@@ -37,22 +37,34 @@ defmodule Presswerk.Config do
     :ok
   end
 
-  @doc false
   defp apply(config) when is_map(config) do
-    if locale = config["default_locale"] do
-      Application.put_env(:presswerk, :default_locale, locale)
+    case Map.fetch(config, "default_locale") do
+      {:ok, locale} when locale in ~w(en de) ->
+        Application.put_env(:presswerk, :default_locale, locale)
+
+      {:ok, locale} ->
+        Logger.warning(
+          "Invalid default_locale in config, expected \"en\" or \"de\": #{inspect(locale)}"
+        )
+
+      :error ->
+        :ok
     end
 
-    case config["currency"] do
-      currency when is_binary(currency) and currency != "" ->
+    case Map.fetch(config, "currency") do
+      {:ok, currency} when is_binary(currency) and currency != "" ->
         Application.put_env(:presswerk, :currency, currency)
 
-      _ ->
+      {:ok, currency} ->
+        Logger.warning(
+          "Invalid currency in config, expected a non-empty string: #{inspect(currency)}"
+        )
+
+      :error ->
         :ok
     end
   end
 
-  @doc false
   defp apply(other) do
     Logger.warning("Unexpected config file content, expected a JSON object: #{inspect(other)}")
   end
