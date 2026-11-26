@@ -61,7 +61,7 @@ defmodule Presswerk.MixProject do
        depth: 1},
       {:daisyui,
        github: "saadeghi/daisyui",
-       tag: "v5.8.1",
+       tag: "v5.8.3",
        sparse: "packages/bundle",
        app: false,
        compile: false,
